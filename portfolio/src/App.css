@@ -1,0 +1,47 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.programmer-image{
+  width: 500px;
+  height: 500px;
+  margin-bottom: -50px;
+}
+.hero{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "hero-image hero-image" "hero-text hero-text";
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+}
+.credit{
+  font-size: 0.8rem;
+  text-align: center;
+  color: #fff;
+}
+.greeting{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  text-align: left;
+}
+.greeting h1,
+.greeting h3,
+.greeting h5 {
+  margin: 0.25rem 0; /* or any small vertical spacing you prefer */
+}
+.about-me{
+  font-size: 1.2rem;
+}
+.highlight{
+  color: #00bfff;
+  font-weight: 700;
+}
