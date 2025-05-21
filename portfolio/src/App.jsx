@@ -25,7 +25,7 @@ function App() {
         </div>
 
         <div className="hero-image">
-          <img src="./public/programmer.png" alt="Cole's Image" className="programmer-image"/>
+          <img src="/programmer.png" alt="Cole's Image" className="programmer-image"/>
           <p><a href='https://pngtree.com/freepng/programmer-clipart-developer-sitting-behind-his-computer-in-glasses-cartoon-vector_11075227.html' className='credit'>png image from pngtree.com/</a></p>
         </div>
 
