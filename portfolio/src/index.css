@@ -1,43 +1,19 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-  background-image: linear-gradient(270deg, #0e2b43 0%, #123743 74%);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 body{
   margin: 0;
   padding: 0;
 }
-.navbar > ul{
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-}
-.navbar > ul > li{
-  margin: 0 1rem;
-  margin-top: -2rem;
-  margin-bottom: 1rem;
-}
-.navbar > ul > li:hover{
-  text-decoration-color: #00bfff;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
-  text-decoration-skip-ink: auto;
-  text-decoration-skip: objects;
-  text-decoration-skip-ink: auto;
-  cursor: pointer;
-  color: #00bfff;
 
-}
 
 
