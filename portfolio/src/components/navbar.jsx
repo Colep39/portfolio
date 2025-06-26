@@ -23,6 +23,9 @@ const NavBar = () => {
                 <li>
                     <a href="#contact" className="hover:text-sky-500 transition-colors">Contact</a>
                 </li>
+                <li>
+                    <a href="/"className="hover:text-sky-500 transition-colors">Resume</a>
+                </li>
                 </ul>
             </div>
         </nav>

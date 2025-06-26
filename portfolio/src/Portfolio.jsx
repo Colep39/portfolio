@@ -19,9 +19,10 @@ function App() {
   }, [])
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <NavBar />
       <Hero />
+      <AboutMe />
       
     </div>
   )
