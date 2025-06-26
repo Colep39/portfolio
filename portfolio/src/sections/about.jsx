@@ -18,7 +18,7 @@ const AboutMe = () => {
         </div>
 
         <img
-          src="/public/profile.jpeg"
+          src="/profile.jpeg"
           alt="Cole Plagens"
           className="w-64 h-96 rounded-full shadow-lg object-cover"
         />

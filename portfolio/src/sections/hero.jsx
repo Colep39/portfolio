@@ -22,8 +22,6 @@ const Hero = () => {
       </h3>
     </div>
   </section>
-  
-
 
   );
 };
