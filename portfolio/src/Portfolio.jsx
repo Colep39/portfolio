@@ -23,6 +23,8 @@ function App() {
       <NavBar />
       <Hero />
       <AboutMe />
+      <Skills />
+      <Contact />
       
     </div>
   )
