@@ -24,7 +24,7 @@ const NavBar = () => {
                     <a href="#contact" className="hover:text-sky-500 transition-colors">Contact</a>
                 </li>
                 <li>
-                    <a href="/"className="hover:text-sky-500 transition-colors">Resume</a>
+                    <a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-sky-500 transition-colors">Resume</a>
                 </li>
                 </ul>
             </div>

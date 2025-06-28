@@ -5,12 +5,15 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 const Contact = () => {
   const form = useRef();
 
+  const [sending, setSending] = React.useState(false);
+
   const sendEmail = (e) => {
     e.preventDefault();
+    setSending(true);
 
     emailjs
       .sendForm(
-        import.meta.env.VITE_SERVEICE_ID,
+        import.meta.env.VITE_SERVICE_ID,
         import.meta.env.VITE_TEMPLATE_ID,
         form.current,
         import.meta.env.VITE_PUBLIC_KEY,
@@ -19,9 +22,11 @@ const Contact = () => {
         () => {
           alert('Message sent successfully!');
           form.current.reset();
+          setSending(false);
         },
         () => {
           alert('Failed to send message. Try again later.');
+          setSending(false);
         }
       );
   };
@@ -29,7 +34,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="h-screen flex flex-col justify-between bg-gradient-to-b from-sky-50 to-white"
+      className="h-screen flex flex-col justify-between  from-sky-50 to-white"
     >
       {/* Content container (flex-grow pushes footer down) */}
       <div className="flex-grow flex flex-col items-center justify-start px-4 sm:px-8 py-18">
@@ -64,9 +69,10 @@ const Contact = () => {
             />
             <button
               type="submit"
+              disabled={sending}
               className="w-full bg-sky-500 text-white font-semibold py-3 rounded-lg hover:bg-sky-600 transition cursor-pointer"
             >
-              Send Message
+              {sending ? 'Sending...' : 'Send Message'}
             </button>
           </form>
 
