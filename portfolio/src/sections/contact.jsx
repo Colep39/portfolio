@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
-const Contact = () => {
+const ContactModal = ({ toggleModal }) => {
   const form = useRef();
-
-  const [sending, setSending] = React.useState(false);
+  const [sending, setSending] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -23,6 +22,7 @@ const Contact = () => {
           alert('Message sent successfully!');
           form.current.reset();
           setSending(false);
+          toggleModal(); // close modal after success
         },
         () => {
           alert('Failed to send message. Try again later.');
@@ -32,87 +32,96 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="h-screen flex flex-col justify-between  from-sky-50 to-white"
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[60]"
+      onClick={toggleModal} // close when clicking background
     >
-      {/* Content container (flex-grow pushes footer down) */}
-      <div className="flex-grow flex flex-col items-center justify-start px-4 sm:px-8 py-18">
-        <div className="max-w-xl w-full text-center">
-          <h1 className="text-4xl font-bold text-sky-700 mb-8">Contact Me</h1>
+      <div
+        className="bg-white rounded-2xl shadow-lg w-[90%] max-w-xl relative p-6 overflow-y-auto max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+      >
+        {/* Close Button */}
+        <button
+          onClick={toggleModal}
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-xl"
+        >
+          ✖
+        </button>
 
-          <form
-            ref={form}
-            onSubmit={sendEmail}
-            className="bg-white shadow-xl rounded-xl p-6 space-y-6"
+        {/* Title */}
+        <h1 className="text-3xl font-bold text-sky-700 mb-6 text-center">
+          Contact Me
+        </h1>
+
+        {/* Form */}
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="bg-white shadow-inner rounded-xl p-4 space-y-4"
+        >
+          <input
+            type="text"
+            name="user_name"
+            placeholder="Your Name"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          />
+          <input
+            type="email"
+            name="user_email"
+            placeholder="Your Email"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            required
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+          />
+          <button
+            type="submit"
+            disabled={sending}
+            className="w-full bg-sky-500 text-white font-semibold py-3 rounded-lg hover:bg-sky-600 transition cursor-pointer"
           >
-            <input
-              type="text"
-              name="user_name"
-              placeholder="Your Name"
-              required
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <input
-              type="email"
-              name="user_email"
-              placeholder="Your Email"
-              required
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <textarea
-              name="message"
-              rows="5"
-              placeholder="Your Message"
-              required
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
-            />
-            <button
-              type="submit"
-              disabled={sending}
-              className="w-full bg-sky-500 text-white font-semibold py-3 rounded-lg hover:bg-sky-600 transition cursor-pointer"
-            >
-              {sending ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
+            {sending ? 'Sending...' : 'Send Message'}
+          </button>
+        </form>
 
-          <p className="mt-6 text-gray-600 text-center text-sm">
-            Or feel free to email me directly at{' '}
-            <a
-                href="mailto:colep3@icloud.com"
-                className="text-sky-600 underline hover:text-sky-800 transition"
-            >
-                colep3@icloud.com
-            </a>
-          </p>
-        </div>
-      </div>
+        {/* Email + Links */}
+        <p className="mt-6 text-gray-600 text-center text-sm">
+          Or email me directly at{' '}
+          <a
+            href="mailto:colep3@icloud.com"
+            className="text-sky-600 underline hover:text-sky-800 transition"
+          >
+            colep3@icloud.com
+          </a>
+        </p>
 
-      {/* Sticky Footer at bottom */}
-      <footer className="bg-sky-100 py-6 text-center text-gray-600">
-        <p className="mb-3 text-sm">© {new Date().getFullYear()} Cole Plagens</p>
-        <div className="flex justify-center gap-8 text-sky-700 text-3xl">
-            <a
+        <div className="mt-6 flex justify-center gap-8 text-sky-700 text-2xl">
+          <a
             href="https://www.linkedin.com/in/cole-plagens/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-sky-500 transition"
-            >
+          >
             <FaLinkedin />
-            </a>
-            <a
+          </a>
+          <a
             href="https://github.com/colep39"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-sky-500 transition"
-            >
+          >
             <FaGithub />
-            </a>
+          </a>
         </div>
-        </footer>
-
-    </section>
+      </div>
+    </div>
   );
 };
 
-export default Contact;
+export default ContactModal;
+

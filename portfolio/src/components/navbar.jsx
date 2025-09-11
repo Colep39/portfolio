@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavBar = () => {
+const NavBar = ( {toggleModal }) => {
     return (
         <nav className="w-full px-6 py-4 bg-white shadow-md fixed top-0 left-0 z-50">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -21,7 +21,12 @@ const NavBar = () => {
                     <a href="#projects" className="hover:text-sky-500 transition-colors">Projects</a>
                 </li>
                 <li>
-                    <a href="#contact" className="hover:text-sky-500 transition-colors">Contact</a>
+                    <button
+                        onClick={toggleModal}
+                        className="hover:text-sky-500 transition-colors bg-transparent border-none cursor-pointer p-0 font-medium"
+                    >
+                        Contact
+                    </button>
                 </li>
                 <li>
                     <a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-sky-500 transition-colors">Resume</a>
