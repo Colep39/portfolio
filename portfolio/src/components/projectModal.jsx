@@ -3,7 +3,7 @@ import React from 'react';
 
 const ProjectModal = ({ project, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4 mt-15">
       <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6">
         {/* Close Button */}
         <button

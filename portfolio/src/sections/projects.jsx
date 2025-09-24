@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ProjectModal from '../components/projectModal';
 
 // A helper function to generate a random number within a range.
 const random = (min, max) => Math.random() * (max - min) + min;
@@ -71,11 +72,13 @@ const StarBackground = ({ children }) => {
         );
       })}
       {/* Overlay to create a foggy/glowing effect */}
-      <div className="absolute inset-0 z-0 opacity-20"
+      <div
+        className="absolute inset-0 z-0 opacity-20 pointer-events-none"
         style={{
           background: 'radial-gradient(circle at center, rgba(79, 70, 229, 0.3) 0%, rgba(0,0,0,0) 50%)',
         }}
       ></div>
+
       {/* Render children on top of the background */}
       {children}
     </div>
@@ -113,7 +116,7 @@ const Projects = () => {
 
   return (
     <StarBackground>
-    <section id="projects" className="min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center justify-center text-white">
+    <section id="projects" className="relative z-10 min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center justify-center text-white">
       <h1 className="text-4xl font-bold mb-12 text-gray-400">My Projects</h1>
       {projects.map((project) => (
         <div
@@ -129,10 +132,13 @@ const Projects = () => {
               {project.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 bg-sky-600/30 text-sky-100 text-xs font-semibold rounded-full"
+                  className="px-3 py-1 bg-sky-600/30 text-sky-100 text-xs font-semibold rounded-full 
+                            transition-all duration-300 ease-in-out 
+                            hover:bg-sky-500/50 hover:scale-110 hover:shadow-lg hover:shadow-sky-500/40 cursor-pointer"
                 >
                   {tech}
                 </span>
+
               ))}
             </div>
           </div>
