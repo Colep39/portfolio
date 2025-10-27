@@ -5,6 +5,7 @@ import AboutMe from './sections/about.jsx';
 import Skills from './sections/skills.jsx';
 import Projects from './sections/projects.jsx';
 import ContactModal from './sections/contact.jsx';
+import Footer from './sections/footer.jsx';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,6 +31,7 @@ function App() {
         <AboutMe />
         <Skills />
         <Projects />
+        <Footer />
       </main>
 
       {isModalOpen && <ContactModal toggleModal={toggleModal} />}
