@@ -1,41 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
-const NavBar = ( {toggleModal }) => {
-    return (
-        <nav className="w-full px-6 py-4 bg-white shadow-md fixed top-0 left-0 z-50">
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
-                {/* Logo */}
-                <a href="#hero" className="text-2xl font-bold text-sky-600 hover:text-sky-500 transition-colors">
-                Cole Plagens
-                </a>
+const NavBar = ({ toggleModal }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-                {/* Navigation Links */}
-                <ul className="flex space-x-6 text-gray-700 font-medium">
-                <li>
-                    <a href="#about" className="hover:text-sky-500 transition-colors">About</a>
-                </li>
-                <li>
-                    <a href="#skills" className="hover:text-sky-500 transition-colors">Skills</a>
-                </li>
-                <li>
-                    <a href="#projects" className="hover:text-sky-500 transition-colors">Projects</a>
-                </li>
-                <li>
-                    <button
-                        onClick={toggleModal}
-                        className="hover:text-sky-500 transition-colors bg-transparent border-none cursor-pointer p-0 font-medium"
-                    >
-                        Contact
-                    </button>
-                </li>
-                <li>
-                    <a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-sky-500 transition-colors">Resume</a>
-                </li>
-                </ul>
-            </div>
-        </nav>
+  const handleToggle = () => setMenuOpen(!menuOpen);
+  const handleLinkClick = () => setMenuOpen(false);
 
-    );
-}
+  return (
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a
+          href="#hero"
+          className="text-2xl font-bold text-sky-600 hover:text-sky-500 transition-colors"
+          onClick={handleLinkClick}
+        >
+          Cole Plagens
+        </a>
+
+        {/* Desktop links */}
+        <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
+          <li><a href="#about" className="hover:text-sky-500">About</a></li>
+          <li><a href="#skills" className="hover:text-sky-500">Skills</a></li>
+          <li><a href="#projects" className="hover:text-sky-500">Projects</a></li>
+          <li><button onClick={toggleModal} className="hover:text-sky-500 cursor-pointer">Contact</button></li>
+          <li><a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-sky-500">Resume</a></li>
+        </ul>
+
+        {/* Mobile hamburger */}
+        <button onClick={handleToggle} className="md:hidden text-sky-600 focus:outline-none">
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <ul className="md:hidden bg-white text-gray-800 shadow-lg flex flex-col items-center space-y-4 py-6">
+          <li><a href="#about" onClick={handleLinkClick}>About</a></li>
+          <li><a href="#skills" onClick={handleLinkClick}>Skills</a></li>
+          <li><a href="#projects" onClick={handleLinkClick}>Projects</a></li>
+          <li><button onClick={() => {toggleModal(); handleLinkClick();}}>Contact</button></li>
+          <li><a href="/cole_plagens_resume.pdf" target="_blank" onClick={handleLinkClick}>Resume</a></li>
+        </ul>
+      )}
+    </nav>
+  );
+};
 
 export default NavBar;

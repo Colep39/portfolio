@@ -151,7 +151,7 @@ const Projects = () => {
             <img
               src={project.images[0]}
               alt={`${project.title} preview`}
-              className="w-full md:w-[90%] max-w-2xl rounded-lg shadow-xl object-cover border-4 border-gray-700"
+              className="w-full sm:w-[90%] max-w-md rounded-lg shadow-xl object-cover border-4 border-gray-700"
             />
           </div>
         </div>

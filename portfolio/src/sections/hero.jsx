@@ -102,14 +102,13 @@ const Hero = () => {
         );
       })}
 
-      {/* Hero content with animation, no background box */}
       <div className="relative z-10 text-center">
         <div className="text-left space-y-4">
           <h5 className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400 animate-fadeInUp">Hello there,</h5>
-          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
+          <h1 className="text-4xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
             I'm <span className="animate-rainbow">Cole</span>
           </h1>
-          <h3 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300 max-w-xl animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
+          <h3 className="text-xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300 max-w-xl animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
             I am a Full Stack Developer and Data Scientist!
           </h3>
         </div>

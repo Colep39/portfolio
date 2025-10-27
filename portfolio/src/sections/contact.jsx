@@ -38,13 +38,13 @@ const ContactModal = ({ toggleModal }) => {
       >
 
       <div
-        className="bg-white rounded-2xl shadow-lg w-[90%] max-w-xl relative p-6 overflow-y-auto max-h-[90vh]"
+        className="bg-white rounded-2xl shadow-lg w-[95%] max-w-md relative p-4 md:p-6 overflow-y-auto max-h-[80vh]"
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
       >
         {/* Close Button */}
         <button
           onClick={toggleModal}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-xl cursor-pointer "
+          className="absolute top-3 right-3 text-lg md:text-xl cursor-pointer"
         >
           ✖
         </button>

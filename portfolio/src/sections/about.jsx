@@ -85,6 +85,7 @@ const StarBackground = ({ children }) => {
 const AboutMe = () => {
   return (
     <StarBackground>
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-4">
       <section className="h-screen w-full px-6 py-16 flex flex-col items-center justify-center text-white relative z-10" id="about">
         <div className="max-w-6xl mx-auto h-full flex flex-col md:flex-row items-center justify-center gap-12">
           
@@ -103,10 +104,11 @@ const AboutMe = () => {
           <img
             src="/profile.jpeg"
             alt="Cole Plagens"
-            className="w-64 h-96 rounded-full shadow-lg object-cover"
+            className="w-48 h-48 md:w-64 md:h-96 rounded-full shadow-lg object-cover"
           />
         </div>
       </section>
+      </div>
     </StarBackground>
   );
 };
