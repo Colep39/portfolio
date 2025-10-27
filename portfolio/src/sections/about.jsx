@@ -1,83 +1,56 @@
 import React, { useState, useEffect } from 'react';
+import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from 'react-icons/fa';
 
-// A helper function to generate a random number within a range.
 const random = (min, max) => Math.random() * (max - min) + min;
 
-// A reusable component for the interactive star background.
 const StarBackground = ({ children }) => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [stars, setStars] = useState([]);
 
-  // Generate a list of stars with random initial positions and sizes.
   useEffect(() => {
     const numStars = 150;
-    const starList = [];
-    for (let i = 0; i < numStars; i++) {
-      starList.push({
-        x: random(0, window.innerWidth),
-        y: random(0, window.innerHeight),
-        size: random(1, 3),
-        delay: random(0, 5),
-      });
-    }
+    const starList = Array.from({ length: numStars }, () => ({
+      x: random(0, window.innerWidth),
+      y: random(0, window.innerHeight),
+      size: random(1, 3),
+      delay: random(0, 5),
+    }));
     setStars(starList);
   }, []);
 
-  // Set up event listeners for mouse movement to track cursor position.
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  // Calculate parallax effect based on cursor position.
-  const calculateParallax = (initialX, initialY, depth) => {
-    const moveX = (cursorPosition.x - window.innerWidth / 2) * depth * 0.05;
-    const moveY = (cursorPosition.y - window.innerHeight / 2) * depth * 0.05;
-    return {
-      x: initialX + moveX,
-      y: initialY + moveY,
-    };
-  };
-
   return (
     <div
-      className="relative w-full h-screen overflow-hidden"
+      className="relative w-full min-h-screen overflow-hidden"
       style={{
-        background: 'radial-gradient(ellipse at center, rgba(17,24,39,0.9) 0%, rgba(0,0,0,1) 100%)',
+        background:
+          'radial-gradient(ellipse at center, rgba(17,24,39,0.9) 0%, rgba(0,0,0,1) 100%)',
       }}
     >
-      {/* Dynamic stars that react to the cursor and pulse */}
-      {stars.map((star, index) => {
-        const parallaxPos = calculateParallax(star.x, star.y, star.size * 0.1);
-        return (
-          <div
-            key={index}
-            className="absolute rounded-full bg-white transition-opacity duration-300 ease-in-out animate-pulse"
-            style={{
-              left: `${parallaxPos.x}px`,
-              top: `${parallaxPos.y}px`,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              animationDelay: `${star.delay}s`,
-            }}
-          ></div>
-        );
-      })}
-      {/* Overlay to create a foggy/glowing effect */}
-      <div className="absolute inset-0 z-0 opacity-20"
+      {/* ⭐️ Stars */}
+      {stars.map((star, index) => (
+        <div
+          key={index}
+          className="absolute rounded-full bg-white animate-pulse opacity-80"
+          style={{
+            left: `${star.x}px`,
+            top: `${star.y}px`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            animationDelay: `${star.delay}s`,
+          }}
+        ></div>
+      ))}
+
+      {/* Glow overlay */}
+      <div
+        className="absolute inset-0 z-0 opacity-20"
         style={{
-          background: 'radial-gradient(circle at center, rgba(79, 70, 229, 0.3) 0%, rgba(0,0,0,0) 50%)',
+          background:
+            'radial-gradient(circle at center, rgba(79, 70, 229, 0.3) 0%, rgba(0,0,0,0) 50%)',
         }}
       ></div>
-      {/* Render children on top of the background */}
-      {children}
+
+      {/* Foreground Content */}
+      <div className="relative z-10">{children}</div>
     </div>
   );
 };
@@ -85,30 +58,70 @@ const StarBackground = ({ children }) => {
 const AboutMe = () => {
   return (
     <StarBackground>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-4">
-      <section className="h-screen w-full px-6 py-16 flex flex-col items-center justify-center text-white relative z-10" id="about">
-        <div className="max-w-6xl mx-auto h-full flex flex-col md:flex-row items-center justify-center gap-12">
-          
-          <div className="flex-1 text-left">
-            <h1 className="text-4xl font-extrabold text-white mb-6">About Me</h1>
-            <p className="text-lg text-gray-200 leading-relaxed">
-              I am passionate about building functioning interactive web apps for users with high{' '}
-              performance. I thrive in{' '}
-              collaborative environments with teams to solve problems in ways to ensure mutual success.
-              I love learning new{' '}
-              technologies and{' '}
-              languages for whatever task is at hand.
-            </p>
-          </div>
+      <section
+        id="about"
+        className="min-h-[calc(var(--vh,1vh)*100)] flex flex-col items-center justify-center text-white px-6 py-16"
+      >
+        {/* Profile Image */}
+        <img
+          src="/profile.jpeg"
+          alt="Cole Plagens"
+          className="w-40 h-40 sm:w-52 sm:h-52 md:w-56 md:h-56 rounded-full object-cover shadow-[0_0_20px_rgba(56,189,248,0.6)] mb-8 transition-transform duration-300 hover:scale-105"
+        />
 
-          <img
-            src="/profile.jpeg"
-            alt="Cole Plagens"
-            className="w-48 h-48 md:w-64 md:h-96 rounded-full shadow-lg object-cover"
-          />
+        {/* Header */}
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
+          Hey, I’m Cole 👋
+        </h1>
+
+        {/* Description */}
+        <p className="max-w-2xl text-center text-gray-300 leading-relaxed mb-8 text-base sm:text-lg">
+          I’m a full stack developer and data scientist who loves building clean,
+          interactive web experiences. I enjoy learning new technologies, tackling
+          complex problems, and collaborating with teams to create meaningful projects.
+        </p>
+
+        {/* Social Buttons */}
+        <div className="flex flex-wrap justify-center gap-5">
+          <a
+            href="https://github.com/colep39"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-gray-800 text-white px-5 py-2 rounded-full shadow-md hover:bg-gray-700 hover:scale-105 transition-all duration-300"
+          >
+            <FaGithub size={18} />
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/cole-plagens/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-sky-600 text-white px-5 py-2 rounded-full shadow-md hover:bg-sky-500 hover:scale-105 transition-all duration-300"
+          >
+            <FaLinkedin size={18} />
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="/cole_plagens_resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2 rounded-full shadow-md hover:bg-indigo-500 hover:scale-105 transition-all duration-300"
+          >
+            <FaFileAlt size={18} />
+            <span>Resume</span>
+          </a>
+
+          <a
+            href="mailto:colep3@icloud.com"
+            className="flex items-center gap-2 bg-teal-600 text-white px-5 py-2 rounded-full shadow-md hover:bg-teal-500 hover:scale-105 transition-all duration-300"
+          >
+            <FaEnvelope size={18} />
+            <span>Email</span>
+          </a>
         </div>
       </section>
-      </div>
     </StarBackground>
   );
 };
