@@ -17,11 +17,11 @@ import {
 } from 'react-icons/si';
 import { FaCode } from 'react-icons/fa'; 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 // Random number helper
 const random = (min, max) => Math.random() * (max - min) + min;
 
-// Star background (static, no cursor tracking)
 const StarBackground = ({ children }) => {
   const [stars, setStars] = useState([]);
 
@@ -50,7 +50,7 @@ const StarBackground = ({ children }) => {
       {stars.map((star, index) => (
         <div
           key={index}
-          className="absolute rounded-full bg-white transition-opacity duration-300 ease-in-out animate-pulse"
+          className="absolute rounded-full bg-white animate-pulse opacity-80"
           style={{
             left: `${star.x}px`,
             top: `${star.y}px`,
@@ -89,7 +89,7 @@ const skills = {
     { name: 'Node.js', icon: <SiNodedotjs size={20} /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss size={20} /> },
     { name: 'Express', icon: <SiExpress size={20} /> },
-    { name: 'Next.js', icon: <SiNextdotjs size={20} />},
+    { name: 'Next.js', icon: <SiNextdotjs size={20} /> },
   ],
   Tools: [
     { name: 'VS Code', icon: <FaCode size={20} /> },
@@ -105,31 +105,60 @@ const Skills = () => {
     <StarBackground>
       <section
         id="skills"
-        className="h-screen w-full px-4 sm:px-8 overflow-hidden relative z-10 text-white flex flex-col items-center justify-center"
+        className="min-h-[calc(var(--vh,1vh)*100)] w-full px-4 sm:px-8 overflow-hidden relative z-10 text-white flex flex-col items-center justify-center"
       >
-        <h1 className="text-4xl font-bold mb-12 animate-fade-in-down">My Skills</h1>
+        {/* Title animation */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          viewport={{ once: true }}
+          className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400"
+        >
+          My Skills
+        </motion.h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl animate-fade-in-up">
+        {/* Grid of skill categories with staggered animation */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            visible: {
+              transition: { staggerChildren: 0.2 },
+            },
+          }}
+        >
           {Object.entries(skills).map(([category, items]) => (
-            <div
+            <motion.div
               key={category}
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
               className="bg-white/10 backdrop-blur-sm shadow-xl rounded-xl p-6 transition duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.02]"
             >
-              <h2 className="text-2xl font-semibold text-gray-200 mb-4 text-center">{category}</h2>
+              <h2 className="text-2xl font-semibold text-gray-200 mb-4 text-center">
+                {category}
+              </h2>
               <div className="flex flex-wrap justify-center gap-3">
                 {items.map(({ name, icon }) => (
-                  <div
+                  <motion.div
                     key={name}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-full shadow text-sm font-medium hover:bg-gray-600 transition cursor-pointer"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-full shadow text-sm font-medium hover:bg-gray-600 cursor-pointer"
                   >
                     {icon}
                     <span>{name}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
     </StarBackground>
   );
