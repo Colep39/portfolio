@@ -35,13 +35,14 @@ const AboutMe = () => {
         className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl space-y-6 relative z-10"
       >
         <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
-          Hey, I’m Cole
+          About Me
         </h1>
 
         <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
           I’m a full stack developer and data scientist who loves crafting intuitive,
           high-performing web applications. I thrive in collaborative environments where
           creativity and logic come together to solve real-world problems.
+          Outside of tech I enjoy sports and TV/movies.
         </p>
 
         {/* Social Buttons */}
