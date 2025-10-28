@@ -10,7 +10,6 @@ const roles = [
 const Hero = () => {
   const [index, setIndex] = useState(0);
 
-  // Rotate role text every 2.5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % roles.length);
@@ -23,7 +22,7 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen w-full m-0 p-0 flex items-center justify-center px-6 sm:px-12 bg-transparent overflow-hidden"
     >
-      {/* Subtle cyan / indigo glow */}
+      {/* Glow overlay */}
       <div
         className="absolute inset-0 opacity-25 pointer-events-none"
         style={{
@@ -39,7 +38,7 @@ const Hero = () => {
           transition={{ duration: 1 }}
           className="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300"
         >
-          Hey, I’m <span className="text-sky-400">Cole</span>
+          Hey, I’m <span className="animate-rainbow">Cole</span>
         </motion.h1>
 
         {/* Rotating Role Text */}
@@ -74,6 +73,22 @@ const Hero = () => {
           </a>
         </div>
       </div>
+
+      {/* Rainbow animation styling */}
+      <style>{`
+        @keyframes rainbow {
+          0% { color: #FF0000; }
+          16% { color: #FF7F00; }
+          33% { color: #FFFF00; }
+          50% { color: #00FF00; }
+          66% { color: #0000FF; }
+          83% { color: #4B0082; }
+          100% { color: #9400D3; }
+        }
+        .animate-rainbow {
+          animation: rainbow 8s infinite linear;
+        }
+      `}</style>
     </section>
   );
 };
