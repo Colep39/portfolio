@@ -24,6 +24,20 @@ const projects = [
       '/themepark9.png',
     ],
   },
+  {
+    id: 2,
+    title: 'Volunteer Matching Platform',
+    description:
+      'Fullstack Application that features Events that volunteers may sign up for ran by administrators that create/manage these events while being able to directly recommend an event to a volunteer. Includes user authentication, notifications, and email verification.',
+    github: 'https://github.com/colep39/4353-Project',
+    techStack: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+    images: [
+      '/volunteer4.png',
+      '/volunteer1.png',
+      '/volunteer2.png',
+      '/volunteer3.png',
+    ]
+  }
 ];
 
 const Projects = () => {
