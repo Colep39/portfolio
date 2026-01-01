@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import ProjectModal from '../components/projectModal';
@@ -43,6 +43,16 @@ const projects = [
 const Projects = () => {
   const [activeProject, setActiveProject] = useState(null);
 
+  useEffect(() => {
+    projects.forEach(project => {
+      project.images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    });
+  }, []);
+
+
   return (
     <section
       id="projects"
@@ -84,7 +94,7 @@ const Projects = () => {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mb-12 bg-gray-800/70 border border-gray-700 rounded-xl shadow-xl p-6 transition-transform duration-300 hover:scale-[1.02]"
+            className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mb-12 bg-gray-800/60 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm p-6 transition-transform duration-300 "
           >
             {/* Left: Text content */}
             <div className="md:w-1/2 max-w-xl space-y-6 text-center md:text-left p-4">
@@ -92,15 +102,26 @@ const Projects = () => {
               <p className="text-gray-300 text-base md:text-lg">{project.description}</p>
 
               {/* Tech stack badges */}
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-4">
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-5">
                 {project.techStack.map((tech) => (
                   <motion.span
                     key={tech}
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                    className="px-3 py-1 bg-sky-600/30 text-sky-100 text-xs font-semibold rounded-full transition-all duration-300 ease-in-out hover:bg-sky-500/50 hover:shadow-lg hover:shadow-sky-500/40 cursor-pointer"
+                    whileHover={{ y: -2, scale: 1.08 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                    className="
+                      relative px-4 py-1.5 text-xs font-semibold tracking-wide
+                      rounded-full cursor-default
+                      bg-gradient-to-r from-sky-500/20 to-indigo-500/20
+                      text-sky-200
+                      border border-white/10
+                      backdrop-blur-md
+                      shadow-[0_0_0_1px_rgba(255,255,255,0.03)]
+                      hover:shadow-[0_8px_30px_-8px_rgba(56,189,248,0.6)]
+                      hover:text-white
+                      transition-all duration-300
+                    "
                   >
-                    {tech}
+                    <span className="relative z-10">{tech}</span>
                   </motion.span>
                 ))}
               </div>

@@ -1,6 +1,37 @@
-import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
 
 const ProjectModal = ({ project, onClose }) => {
+
+  const [[index, direction], setIndex] = useState([0, 0]);
+
+  const paginate = (newDirection) => {
+    setIndex(([prev]) => [
+      (prev + newDirection + project.images.length) % project.images.length,
+      newDirection
+    ]);
+  };
+
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      position: 'absolute',
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      position: 'relative',
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+      position: 'absolute',
+    }),
+  };
+
+
   useEffect(() => {
     // Disable background scroll
     document.body.style.overflow = 'hidden';
@@ -10,10 +41,22 @@ const ProjectModal = ({ project, onClose }) => {
       document.body.style.overflow = 'auto';
     };
   }, []);
-  
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'ArrowRight') paginate(1);
+      if (e.key === 'ArrowLeft') paginate(-1);
+      if (e.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-20 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 shadow-lg">
+      <div className="bg-white rounded-xl w-full max-w-4xl relative p-6 shadow-lg">
         {/* Close Button */}
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold cursor-pointer"
@@ -36,18 +79,67 @@ const ProjectModal = ({ project, onClose }) => {
             ))}
           </div>
         </div>
+        
+        {/* Image Carousel */}
+        <div className="relative w-full overflow-hidden rounded-xl">
+          <div className="relative w-full overflow-hidden rounded-xl aspect-video bg-gray-100">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.img
+                key={index}
+                src={project.images[index]}
+                alt={`Screenshot ${index + 1}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="w-full h-full object-cover rounded-xl"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x > 120) paginate(-1);
+                  else if (info.offset.x < -120) paginate(1);
+                }}
+              />
+            </AnimatePresence>
 
-        {/* Vertical Image Stack */}
-        <div className="space-y-4">
-          {project.images.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt={`Screenshot ${idx + 1}`}
-              className="w-full rounded-lg shadow"
-            />
-          ))}
+            {/* Arrows */}
+            <button
+              onClick={() => paginate(-1)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition z-10"
+            >
+              ‹
+            </button>
+
+            <button
+              onClick={() => paginate(1)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition z-10"
+            >
+              ›
+            </button>
+          </div>
+
+
+          {/* Left Arrow */}
+          <button
+            onClick={() => paginate(-1)}
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition"
+          >
+            ‹
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => paginate(1)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition"
+          >
+            ›
+          </button>
         </div>
+
+        
       </div>
     </div>
   );
