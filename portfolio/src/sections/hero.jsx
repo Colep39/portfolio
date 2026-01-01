@@ -20,15 +20,12 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full m-0 p-0 flex items-center justify-center px-6 sm:px-12 bg-transparent overflow-hidden"
+      className="relative min-h-screen w-full m-0 p-0 flex items-center justify-center px-6 sm:px-12 overflow-hidden"
     >
       {/* Glow overlay */}
       <div
         className="absolute inset-0 opacity-25 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle at 25% 30%, rgba(56,189,248,0.20), transparent 70%), radial-gradient(circle at 80% 65%, rgba(99,102,241,0.20), transparent 70%)',
-        }}
+        
       ></div>
 
       <div className="relative z-10 text-center md:text-left space-y-6">

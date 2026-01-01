@@ -1,10 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const ContactModal = ({ toggleModal }) => {
   const form = useRef();
   const [sending, setSending] = useState(false);
+
+  useEffect(() => {
+    // Disable background scroll
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      // Re-enable scroll when modal closes
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();

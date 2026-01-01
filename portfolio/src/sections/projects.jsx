@@ -46,15 +46,11 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center justify-center text-white bg-transparent overflow-hidden"
+      className="relative min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center justify-center text-white overflow-hidden"
     >
       {/* Subtle cyan/indigo glow overlay */}
       <div
         className="absolute inset-0 opacity-25 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle at 40% 30%, rgba(56,189,248,0.15), transparent 70%), radial-gradient(circle at 70% 70%, rgba(99,102,241,0.15), transparent 70%)',
-        }}
       ></div>
 
       {/* Section title */}

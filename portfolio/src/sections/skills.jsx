@@ -48,15 +48,11 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="relative w-full min-h-screen m-0 p-0 px-4 sm:px-8 flex flex-col items-center justify-center text-white bg-transparent overflow-hidden"
+      className="relative w-full min-h-screen m-0 p-0 px-4 sm:px-8 flex flex-col items-center justify-center text-white overflow-hidden"
     >
-      {/* Subtle glow overlay (consistent with Hero/About/Projects) */}
+      {/* Subtle glow overlay */}
       <div
         className="absolute inset-0 opacity-25 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle at 40% 30%, rgba(56,189,248,0.15), transparent 70%), radial-gradient(circle at 70% 70%, rgba(99,102,241,0.15), transparent 70%)',
-        }}
       ></div>
 
       {/* Section Title */}
@@ -65,7 +61,7 @@ const Skills = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
-        className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400 relative z-10"
+        className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-sky-400 relative z-10"
       >
         My Skills
       </motion.h1>
@@ -102,7 +98,7 @@ const Skills = () => {
                   key={name}
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-700 text-white rounded-full shadow text-sm font-medium hover:bg-gray-600 cursor-pointer transition"
+                  className="flex items-center gap-2 px-4 py-2 bg-sky-500 text-white rounded-full shadow text-sm font-medium hover:bg-sky-700 cursor-pointer transition"
                 >
                   {icon}
                   <span>{name}</span>

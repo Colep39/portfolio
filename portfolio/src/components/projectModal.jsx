@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ProjectModal = ({ project, onClose }) => {
+  useEffect(() => {
+    // Disable background scroll
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      // Re-enable scroll when modal closes
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+  
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-20 bg-black/50 backdrop-blur-sm">
       <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative p-6 shadow-lg">

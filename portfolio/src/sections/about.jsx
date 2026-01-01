@@ -6,23 +6,17 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="relative w-full min-h-screen m-0 p-0 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-6 sm:px-12 text-white bg-transparent overflow-hidden"
+      className="relative w-full min-h-screen m-0 p-0 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 px-6 sm:px-12 text-white overflow-hidden"
     >
-      {/* Subtle cyan/indigo overlay for depth (matches Hero & Skills) */}
-      <div
-        className="absolute inset-0 opacity-25 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle at 40% 30%, rgba(56,189,248,0.15), transparent 70%), radial-gradient(circle at 70% 70%, rgba(99,102,241,0.15), transparent 70%)',
-        }}
-      ></div>
+      {/* Subtle cyan/indigo overlay for depth */}
+      <div className="absolute inset-0 opacity-25 pointer-events-none"></div>
 
       {/* Left: Profile Image */}
       <div className="flex justify-center md:justify-end flex-shrink-0 relative z-10">
         <img
           src="/profile.jpeg"
           alt="Cole Plagens"
-          className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full object-cover shadow-[0_0_30px_rgba(56,189,248,0.6)] transition-transform duration-300 hover:scale-105"
+          className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full object-cover shadow-[0_0_30px_rgba(200,189,248,0.6)] transition-transform duration-300 hover:scale-105"
         />
       </div>
 
@@ -34,7 +28,7 @@ const AboutMe = () => {
         viewport={{ once: true }}
         className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl space-y-6 relative z-10"
       >
-        <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400">
+        <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-700">
           About Me
         </h1>
 
