@@ -7,8 +7,11 @@ import {
   SiMysql,
   SiPostgresql,
   SiJavascript,
+  SiTypescript,
 } from 'react-icons/si';
 import { FaCode } from 'react-icons/fa';
+import { SiDotnet } from 'react-icons/si';
+
 
 const techIcons = {
   React: SiReact,
@@ -17,7 +20,7 @@ const techIcons = {
   MySQL: SiMysql,
   PostgreSQL: SiPostgresql,
   JavaScript: SiJavascript,
-  'C#': FaCode, // safe + intentional fallback
+  'C#': SiDotnet,
 };
 
 const ProjectModal = ({ project, onClose }) => {
@@ -64,7 +67,7 @@ const ProjectModal = ({ project, onClose }) => {
 
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, []);
+  });
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-20 bg-black/50 backdrop-blur-sm">

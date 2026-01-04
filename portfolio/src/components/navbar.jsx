@@ -8,7 +8,7 @@ const NavBar = ({ toggleModal }) => {
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 ">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <a
           href="#hero"
@@ -19,7 +19,7 @@ const NavBar = ({ toggleModal }) => {
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <ul className="hidden md:flex space-x-6 text-gray-700 font-semibold tracking-wide">
           <li><a href="#about" className="hover:text-sky-500">About</a></li>
           <li><a href="#skills" className="hover:text-sky-500">Skills</a></li>
           <li><a href="#projects" className="hover:text-sky-500">Projects</a></li>
