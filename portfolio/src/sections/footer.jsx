@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="relative w-full m-0 p-0 py-8 flex flex-col items-center justify-center text-gray-300 bg-transparent overflow-hidden"
+      className="relative w-full m-0 p-0 py-8 flex flex-col items-center justify-center text-gray-700 bg-white overflow-hidden"
     >
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"
@@ -16,7 +16,7 @@ const Footer = () => {
       ></div>
 
       <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-8 w-full max-w-5xl px-6">
-        <p className="text-sm text-gray-400 text-center sm:text-left">
+        <p className="text-sm text-gray-700 text-center sm:text-left">
           © {new Date().getFullYear()} Cole Plagens. All rights reserved.
         </p>
 
