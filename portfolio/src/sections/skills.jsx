@@ -16,8 +16,10 @@ import {
   SiNpm,
   SiPrisma,
   SiNextdotjs,
+  SiTypescript,
 } from 'react-icons/si';
 import { FaCode } from 'react-icons/fa';
+import { DiDocker} from 'react-icons/di';
 
 const skills = {
   Languages: [
@@ -41,6 +43,7 @@ const skills = {
     { name: 'Vite', icon: <SiVite size={20} /> },
     { name: 'npm', icon: <SiNpm size={20} /> },
     { name: 'Prisma ORM', icon: <SiPrisma size={20} /> },
+    { name: 'Docker', icon: <DiDocker size={20} /> },
   ],
 };
 

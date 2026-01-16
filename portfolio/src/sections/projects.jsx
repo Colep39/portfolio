@@ -106,18 +106,17 @@ const Projects = () => {
                 {project.techStack.map((tech) => (
                   <motion.span
                     key={tech}
-                    whileHover={{ y: -2, scale: 1.08 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                     className="
                       relative px-4 py-1.5 text-xs font-semibold tracking-wide
                       rounded-full cursor-default
-                      bg-gradient-to-r from-sky-500/20 to-indigo-500/20
-                      text-sky-200
+                      bg-white
+                      text-blue-500
                       border border-white/10
                       backdrop-blur-md
                       shadow-[0_0_0_1px_rgba(255,255,255,0.03)]
                       hover:shadow-[0_8px_30px_-8px_rgba(56,189,248,0.6)]
-                      hover:text-white
+                      hover:text-blue-700
                       transition-all duration-300
                     "
                   >
