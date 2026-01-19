@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaRegEye } from 'react-icons/fa';
 import ProjectModal from '../components/projectModal';
 
 // Project data
@@ -23,6 +24,7 @@ const projects = [
       '/themepark7.png',
       '/themepark9.png',
     ],
+    live: null,
   },
   {
     id: 2,
@@ -36,7 +38,8 @@ const projects = [
       '/volunteer1.png',
       '/volunteer2.png',
       '/volunteer3.png',
-    ]
+    ],
+    live: 'https://cougar-connect.vercel.app/',
   }
 ];
 
@@ -135,6 +138,21 @@ const Projects = () => {
                 <FaGithub size={18} />
                 <span>View on GitHub</span>
               </a>
+
+              {/* Live Site button */}
+              
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-6 ml-5 px-5 py-2 bg-gray-700 text-white rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300"
+                >
+                  <FaRegEye size={18} />
+                  <span>Live Site</span>
+                </a>
+              )}
+
             </div>
 
             {/* Right: Project image */}
