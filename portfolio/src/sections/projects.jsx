@@ -1,16 +1,54 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaRegEye } from 'react-icons/fa';
+import { FaGithub, FaRegEye, FaReact, FaNodeJs } from 'react-icons/fa';
+import {
+  SiDotnet,
+  SiMysql,
+  SiPostgresql,
+  SiExpress,
+} from 'react-icons/si';
 import ProjectModal from '../components/projectModal';
 
-// Project data
+const TECH_CONFIG = {
+  React: {
+    icon: FaReact,
+    color: 'text-sky-400',
+    glow: 'hover:shadow-sky-400/40',
+  },
+  'C#': {
+    icon: SiDotnet,
+    color: 'text-purple-400',
+    glow: 'hover:shadow-purple-400/40',
+  },
+  MySQL: {
+    icon: SiMysql,
+    color: 'text-blue-400',
+    glow: 'hover:shadow-blue-400/40',
+  },
+  'Node.js': {
+    icon: FaNodeJs,
+    color: 'text-green-400',
+    glow: 'hover:shadow-green-400/40',
+  },
+  Express: {
+    icon: SiExpress,
+    color: 'text-gray-300',
+    glow: 'hover:shadow-white/20',
+  },
+  PostgreSQL: {
+    icon: SiPostgresql,
+    color: 'text-indigo-400',
+    glow: 'hover:shadow-indigo-400/40',
+  },
+};
+
 const projects = [
   {
     id: 1,
     title: 'Themepark Management System',
     description:
-      'A fullstack management system for a themepark, built with React, C#, and MySQL. It allows users to manage rides, employees, and customer data efficiently. The system features user authentication for admins, employees, and customers with differing access levels. The system provides data reports and entry pages for non-customer users to manage themepark operations and logistics. Triggers were used to enforce semantic constraints such as ensuring the maintenance status of a ride restricts customer access.',
+      'A fullstack management system for a themepark, built with React, C#, and MySQL. It supports role-based access, reporting dashboards, and database-enforced constraints for operational safety.',
     github: 'https://github.com/colep39/themepark-ms',
     techStack: ['React', 'C#', 'MySQL'],
     images: [
@@ -30,7 +68,7 @@ const projects = [
     id: 2,
     title: 'Volunteer Matching Platform',
     description:
-      'Fullstack Application that features Events that volunteers may sign up for ran by administrators that create/manage these events while being able to directly recommend an event to a volunteer. Includes user authentication, notifications, and email verification.',
+      'A fullstack platform for managing volunteer events with admin-controlled listings, recommendations, authentication, notifications, and email verification.',
     github: 'https://github.com/colep39/4353-Project',
     techStack: ['React', 'Node.js', 'Express', 'PostgreSQL'],
     images: [
@@ -40,7 +78,7 @@ const projects = [
       '/volunteer3.png',
     ],
     live: 'https://cougar-connect.vercel.app/',
-  }
+  },
 ];
 
 const Projects = () => {
@@ -55,31 +93,23 @@ const Projects = () => {
     });
   }, []);
 
-
   return (
     <section
       id="projects"
-      className="relative min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center justify-center text-white overflow-hidden"
+      className="relative min-h-screen w-full px-4 sm:px-8 py-16 flex flex-col items-center text-white overflow-hidden"
     >
-      {/* Subtle cyan/indigo glow overlay */}
-      <div
-        className="absolute inset-0 opacity-25 pointer-events-none"
-      ></div>
-
-      {/* Section title */}
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
-        className="text-4xl font-bold mb-12 mt-4 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400 relative z-10"
+        className="text-4xl font-bold mb-14 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400"
       >
         My Projects
       </motion.h1>
 
-      {/* Project Cards */}
       <motion.div
-        className="flex flex-col items-center w-full relative z-10"
+        className="flex flex-col items-center w-full"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -89,7 +119,7 @@ const Projects = () => {
           },
         }}
       >
-        {projects.map((project) => (
+        {projects.map(project => (
           <motion.div
             key={project.id}
             variants={{
@@ -97,84 +127,94 @@ const Projects = () => {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mb-12 bg-gray-800/60 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-sm p-6 transition-transform duration-300 "
+            className="flex flex-col md:flex-row w-full max-w-6xl mb-14 bg-gray-800/60 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-md p-6"
           >
-            {/* Left: Text content */}
-            <div className="md:w-1/2 max-w-xl space-y-6 text-center md:text-left p-4">
-              <h2 className="text-3xl font-bold text-gray-200">{project.title}</h2>
-              <p className="text-gray-300 text-base md:text-lg">{project.description}</p>
+            <div className="md:w-1/2 space-y-6 text-center md:text-left p-4">
+              <h2 className="text-3xl font-bold text-gray-200">
+                {project.title}
+              </h2>
 
-              {/* Tech stack badges */}
-              <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-5">
-                {project.techStack.map((tech) => (
-                  <motion.span
-                    key={tech}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                    className="
-                      relative px-4 py-1.5 text-xs font-semibold tracking-wide
-                      rounded-full cursor-default
-                      bg-white
-                      text-blue-500
-                      border border-white/10
-                      backdrop-blur-md
-                      shadow-[0_0_0_1px_rgba(255,255,255,0.03)]
-                      hover:shadow-[0_8px_30px_-8px_rgba(56,189,248,0.6)]
-                      hover:text-blue-700
-                      transition-all duration-300
-                    "
-                  >
-                    <span className="relative z-10">{tech}</span>
-                  </motion.span>
-                ))}
+              <p className="text-gray-300 text-base md:text-lg">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-6">
+                {project.techStack.map(tech => {
+                  const techData = TECH_CONFIG[tech];
+                  if (!techData) return null;
+                  const Icon = techData.icon;
+
+                  return (
+                    <motion.div
+                      key={tech}
+                      whileHover={{ y: -4 }}
+                      transition={{ duration: 0.15, ease: 'easeOut' }}
+                      className={`
+                        flex items-center gap-2 px-4 py-2 rounded-full
+                        bg-white/5 backdrop-blur-md
+                        border border-white/10
+                        shadow-md
+                        ${techData.glow}
+                        hover:shadow-lg
+                        transition-all duration-300
+                      `}
+                      title={tech}
+                    >
+                      <Icon className={`text-lg ${techData.color}`} />
+                      <span className="text-xs font-medium text-gray-200">
+                        {tech}
+                      </span>
+                    </motion.div>
+                  );
+                })}
               </div>
 
-              {/* GitHub button */}
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-6 px-5 py-2 bg-gray-700 text-white rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300"
-              >
-                <FaGithub size={18} />
-                <span>View on GitHub</span>
-              </a>
-
-              {/* Live Site button */}
-              
-              {project.live && (
+              <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-8">
                 <a
-                  href={project.live}
+                  href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-6 ml-5 px-5 py-2 bg-gray-700 text-white rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-5 py-2 bg-gray-700 text-white rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300"
                 >
-                  <FaRegEye size={18} />
-                  <span>Live Site</span>
+                  <FaGithub size={18} />
+                  <span>GitHub</span>
                 </a>
-              )}
 
+                {project.live && (
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2 bg-gray-700 text-white rounded-full shadow-md hover:bg-gray-600 hover:scale-105 transition-all duration-300"
+                  >
+                    <FaRegEye size={18} />
+                    <span>Live Site</span>
+                  </a>
+                )}
+              </div>
             </div>
 
-            {/* Right: Project image */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 200 }}
-              className="md:w-1/2 mt-8 md:mt-0 flex justify-center cursor-pointer"
+              className="md:w-1/2 mt-10 md:mt-0 flex justify-center cursor-pointer"
               onClick={() => setActiveProject(project)}
             >
               <img
                 src={project.images[0]}
                 alt={`${project.title} preview`}
-                className="w-full sm:w-[90%] max-w-md rounded-lg shadow-xl object-cover border-4 border-gray-700"
+                className="w-full sm:w-[90%] max-w-md rounded-xl shadow-xl object-cover border-4 border-gray-700"
               />
             </motion.div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Modal */}
       {activeProject && (
-        <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
+        <ProjectModal
+          project={activeProject}
+          onClose={() => setActiveProject(null)}
+        />
       )}
     </section>
   );
