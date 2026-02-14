@@ -33,7 +33,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300"
+          className="text-5xl sm:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-black"
         >
           Hey, I’m <span className="animate-rainbow">Cole</span>
         </motion.h1>
@@ -47,7 +47,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.6 }}
-              className="text-xl sm:text-3xl font-semibold text-gray-300"
+              className="text-xl sm:text-3xl font-semibold text-gray-400"
             >
               {roles[index]}
             </motion.h2>
@@ -64,7 +64,7 @@ const Hero = () => {
           </a>
           <a
             href="#about"
-            className="px-7 py-3 border border-gray-500 text-gray-200 rounded-full hover:border-sky-400 hover:text-sky-300 hover:scale-105 transition"
+            className="px-7 py-3 border border-gray-500 text-gray-500 rounded-full hover:border-sky-400 hover:text-sky-300 hover:scale-105 transition"
           >
             About Me
           </a>

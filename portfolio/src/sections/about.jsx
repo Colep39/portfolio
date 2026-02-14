@@ -32,7 +32,7 @@ const AboutMe = () => {
           About Me
         </h1>
 
-        <p className="text-gray-300 leading-relaxed text-base sm:text-lg">
+        <p className="text-gray-500 leading-relaxed text-base sm:text-lg">
           I’m a full stack developer and data scientist who loves crafting intuitive,
           high-performing web applications. I thrive in collaborative environments where
           creativity and logic come together to solve real-world problems.

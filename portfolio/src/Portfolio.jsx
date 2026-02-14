@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-gray-900">
+    <div className="min-h-screen w-full overflow-x-hidden bg-blue-100 from-slate-900 via-slate-800 to-gray-900">
       <NavBar toggleModal={toggleModal} />
 
       <main className="relative z-10">
