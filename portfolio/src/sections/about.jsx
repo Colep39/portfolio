@@ -14,7 +14,7 @@ const AboutMe = () => {
       {/* Left: Profile Image */}
       <div className="flex justify-center md:justify-end flex-shrink-0 relative z-10">
         <img
-          src="/profile.jpeg"
+          src="/careerpfp.jpeg"
           alt="Cole Plagens"
           className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full object-cover shadow-[0_0_30px_rgba(200,189,248,0.6)] transition-transform duration-300 hover:scale-105"
         />
@@ -28,9 +28,10 @@ const AboutMe = () => {
         viewport={{ once: true }}
         className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl space-y-6 relative z-10"
       >
-        <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-700">
+        <h1 className="text-3xl sm:text-4xl font-bold animated-gradient-text">
           About Me
         </h1>
+
 
         <p className="text-gray-500 leading-relaxed text-base sm:text-lg">
           I’m a full stack developer and data scientist who loves crafting intuitive,

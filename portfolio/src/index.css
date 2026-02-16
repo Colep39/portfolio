@@ -30,3 +30,36 @@ html{
 }
 
 
+.animated-gradient-text {
+  background: linear-gradient(
+    -45deg,
+    #38bdf8,   /* sky */
+    #6366f1,   /* indigo */
+    #86efac,   /* pastel green */
+    #8b5cf6,   /* violet */
+    #0ea5e9    /* blue */
+  );
+
+  background-size: 350% 350%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  animation: gradientShift 10s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+

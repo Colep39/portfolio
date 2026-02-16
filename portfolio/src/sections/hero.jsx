@@ -5,6 +5,9 @@ const roles = [
   "Full Stack Developer",
   "Data Scientist",
   "Software Engineer",
+  "Data Analyst",
+  "",
+
 ];
 
 const Hero = () => {
@@ -28,7 +31,7 @@ const Hero = () => {
         
       ></div>
 
-      <div className="relative z-10 text-center md:text-left space-y-6">
+      <div className="relative z-10 text-center md:text-left space-y-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,7 +58,7 @@ const Hero = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-6">
+        <div className="flex flex-wrap justify-center md:justify-start gap-4">
           <a
             href="#projects"
             className="px-7 py-3 bg-sky-500 text-white font-semibold rounded-full shadow-lg hover:bg-sky-400 hover:scale-105 transition"

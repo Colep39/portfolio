@@ -7,7 +7,9 @@ import {
   SiMysql,
   SiPostgresql,
   SiExpress,
+  SiTypescript,
 } from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
 import ProjectModal from '../components/projectModal';
 
 const TECH_CONFIG = {
@@ -41,6 +43,16 @@ const TECH_CONFIG = {
     color: 'text-indigo-400',
     glow: 'hover:shadow-indigo-400/40',
   },
+  TypeScript: {
+    icon: SiTypescript,
+    color: 'text-blue-400',
+    glow: 'hover:shadow-blue-400/40',
+  },
+  AWS: {
+    icon: FaAws,
+    color: 'text-orange-400',
+    glow: 'hover:shadow-orange-400/40',
+  }
 };
 
 const projects = [
@@ -79,6 +91,16 @@ const projects = [
     ],
     live: 'https://cougar-connect.vercel.app/',
   },
+  {
+    id: 3,
+    title: 'Startup Operations Platform',
+    description: 'In Progress...',
+    github: 'https://github.com/colep39/'
+,   techStack: ['React', 'TypeScript', 'C#', 'PostgreSQL', 'AWS',],
+    images: [
+      '/programmingimage.jpg',
+    ],
+  },
 ];
 
 const Projects = () => {
@@ -103,7 +125,7 @@ const Projects = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
-        className="text-4xl font-bold mb-14 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400"
+        className="text-4xl sm:text-4xl font-bold animated-gradient-text mb-14 mt-4 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400"
       >
         My Projects
       </motion.h1>

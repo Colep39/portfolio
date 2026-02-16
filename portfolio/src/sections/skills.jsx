@@ -17,9 +17,12 @@ import {
   SiPrisma,
   SiNextdotjs,
   SiTypescript,
+  SiDotnet,
 } from 'react-icons/si';
-import { FaCode } from 'react-icons/fa';
+import { FaCode, FaAws, FaJenkins, FaGithub } from 'react-icons/fa';
+import { VscAzure } from "react-icons/vsc";
 import { DiDocker} from 'react-icons/di';
+import { BiLogoVisualStudio } from "react-icons/bi";
 
 const skills = {
   Languages: [
@@ -28,22 +31,29 @@ const skills = {
     { name: 'HTML', icon: <SiHtml5 size={20} /> },
     { name: 'CSS', icon: <SiCss3 size={20} /> },
     { name: 'JavaScript', icon: <SiJavascript size={20} /> },
+    { name: 'TypeScript', icon: <SiTypescript size={20} /> },
     { name: 'SQL', icon: <SiMysql size={20} /> },
+
   ],
-  Frameworks: [
+  'Frameworks/Libraries': [
     { name: 'React', icon: <SiReact size={20} /> },
     { name: 'Node.js', icon: <SiNodedotjs size={20} /> },
+    { name: 'ASP.NET', icon: <SiDotnet size={20} /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss size={20} /> },
     { name: 'Express', icon: <SiExpress size={20} /> },
     { name: 'Next.js', icon: <SiNextdotjs size={20} /> },
+
   ],
   Tools: [
-    { name: 'VS Code', icon: <FaCode size={20} /> },
+    { name: 'VS Code', icon: <BiLogoVisualStudio size={20} /> },
     { name: 'GitHub', icon: <SiGithub size={20} /> },
     { name: 'Vite', icon: <SiVite size={20} /> },
     { name: 'npm', icon: <SiNpm size={20} /> },
-    { name: 'Prisma ORM', icon: <SiPrisma size={20} /> },
     { name: 'Docker', icon: <DiDocker size={20} /> },
+    { name: 'Jenkins', icon: <FaJenkins size={20} /> },
+    { name: 'AWS', icon: <FaAws size={20} /> },
+    { name: 'Azure', icon: <VscAzure size={20} /> },
+
   ],
 };
 
@@ -59,15 +69,9 @@ const Skills = () => {
       ></div>
 
       {/* Section Title */}
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        viewport={{ once: true }}
-        className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-indigo-400 relative z-10"
-      >
-        My Skills
-      </motion.h1>
+      <h1 className="text-3xl sm:text-4xl font-bold animated-gradient-text mb-14">
+          My Skills
+      </h1>
 
       {/* Skills Grid */}
       <motion.div

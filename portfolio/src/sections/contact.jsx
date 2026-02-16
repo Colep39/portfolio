@@ -107,7 +107,7 @@ const ContactModal = ({ toggleModal }) => {
             href="mailto:colep3@icloud.com"
             className="text-sky-600 underline hover:text-sky-800 transition"
           >
-            colep3@icloud.com
+            cbplagen@outlook.com
           </a>
         </p>
 
