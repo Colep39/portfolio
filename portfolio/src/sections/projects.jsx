@@ -8,6 +8,7 @@ import {
   SiPostgresql,
   SiExpress,
   SiTypescript,
+  SiJavascript,
 } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa';
 import ProjectModal from '../components/projectModal';
@@ -52,7 +53,12 @@ const TECH_CONFIG = {
     icon: FaAws,
     color: 'text-orange-400',
     glow: 'hover:shadow-orange-400/40',
-  }
+  },
+  JavaScript: {
+    icon: SiJavascript,
+    color: 'text-yellow-400',
+    glow: 'hover:shadow-yellow-400/40',
+  },
 };
 
 const projects = [
@@ -62,7 +68,7 @@ const projects = [
     description:
       'A fullstack management system for a themepark, built with React, C#, and MySQL. It supports role-based access, reporting dashboards, and database-enforced constraints for operational safety.',
     github: 'https://github.com/colep39/themepark-ms',
-    techStack: ['React', 'C#', 'MySQL'],
+    techStack: ['React', 'JavaScript', 'C#', 'MySQL'],
     images: [
       '/themepark3.png',
       '/themepark14.png',
@@ -82,7 +88,7 @@ const projects = [
     description:
       'A fullstack platform for managing volunteer events with admin-controlled listings, recommendations, authentication, notifications, and email verification.',
     github: 'https://github.com/colep39/4353-Project',
-    techStack: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+    techStack: ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
     images: [
       '/volunteer4.png',
       '/volunteer1.png',
@@ -94,11 +100,11 @@ const projects = [
   {
     id: 3,
     title: 'Startup Operations Platform',
-    description: 'In Progress...',
+    description: 'In Progress... blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah ',
     github: 'https://github.com/colep39/'
 ,   techStack: ['React', 'TypeScript', 'C#', 'PostgreSQL', 'AWS',],
     images: [
-      '/programmingimage.jpg',
+      '/workinprogress.jpg',
     ],
   },
 ];

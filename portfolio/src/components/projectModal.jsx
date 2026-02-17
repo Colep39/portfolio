@@ -9,7 +9,7 @@ import {
   SiJavascript,
   SiTypescript,
 } from 'react-icons/si';
-import { FaCode } from 'react-icons/fa';
+import { FaCode, FaAws  } from 'react-icons/fa';
 import { SiDotnet } from 'react-icons/si';
 
 
@@ -21,6 +21,9 @@ const techIcons = {
   PostgreSQL: SiPostgresql,
   JavaScript: SiJavascript,
   'C#': SiDotnet,
+  TypeScript: SiTypescript,
+  AWS: FaAws,
+ 
 };
 
 const ProjectModal = ({ project, onClose }) => {

@@ -14,12 +14,11 @@ import {
   SiGithub,
   SiVite,
   SiNpm,
-  SiPrisma,
   SiNextdotjs,
   SiTypescript,
   SiDotnet,
 } from 'react-icons/si';
-import { FaCode, FaAws, FaJenkins, FaGithub } from 'react-icons/fa';
+import { FaAws, FaJenkins } from 'react-icons/fa';
 import { VscAzure } from "react-icons/vsc";
 import { DiDocker} from 'react-icons/di';
 import { BiLogoVisualStudio } from "react-icons/bi";
