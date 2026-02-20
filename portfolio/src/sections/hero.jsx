@@ -6,8 +6,9 @@ const roles = [
   "Data Scientist",
   "Software Engineer",
   "Data Analyst",
-  "",
-
+  "Problem Solver",
+  "Collaborator",
+  "System Minded",
 ];
 
 const Hero = () => {
