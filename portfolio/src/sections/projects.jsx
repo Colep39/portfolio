@@ -100,7 +100,7 @@ const projects = [
   {
     id: 3,
     title: 'Startup Operations Platform',
-    description: 'In Progress... blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah blah blah blah blah blah blah blah ',
+    description: 'In Progress... ',
     github: 'https://github.com/colep39/'
 ,   techStack: ['React', 'TypeScript', 'C#', 'PostgreSQL', 'AWS',],
     images: [
