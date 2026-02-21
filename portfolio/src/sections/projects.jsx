@@ -223,16 +223,56 @@ const Projects = () => {
             </div>
 
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 200 }}
-              className="md:w-1/2 mt-10 md:mt-0 flex justify-center cursor-pointer"
               onClick={() => setActiveProject(project)}
+              className="md:w-1/2 mt-10 md:mt-0 flex justify-center"
             >
-              <img
-                src={project.images[0]}
-                alt={`${project.title} preview`}
-                className="w-full sm:w-[90%] max-w-md rounded-xl shadow-xl object-cover border-4 border-gray-700"
-              />
+              <motion.button
+                type="button"
+                aria-label={`Open ${project.title} gallery`}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.99 }}
+                className="group relative w-full sm:w-[90%] max-w-md cursor-pointer focus:outline-none"
+              >
+                {/* Animated gradient border */}
+                <motion.div
+                  whileHover={{ backgroundPosition: "200% center" }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                  className="
+                    rounded-2xl p-[2px]
+                    bg-[linear-gradient(90deg,#38bdf8,#4ade80,#818cf8,#38bdf8)]
+                    bg-[length:200%_100%]
+                    shadow-xl
+                    transition-shadow duration-300
+                    group-hover:shadow-2xl
+                  "
+                >
+                  {/* Fixed-size preview (CONSISTENT across all projects) */}
+                  <div className="relative rounded-2xl overflow-hidden bg-gray-900 h-[240px] sm:h-[280px] md:h-[320px]">
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `url(${project.images[0]})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                      }}
+                    />
+
+                    {/* Clickable affordance overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
+
+                    {/* Click to view chip */}
+                    <div className="absolute bottom-4 right-4">
+                      <div className="flex items-center gap-2 rounded-full bg-black/55 px-4 py-2 text-sm text-white backdrop-blur-md border border-white/15 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="font-medium">View</span>
+                        <span className="inline-block translate-x-0 group-hover:translate-x-0.5 transition-transform duration-300">
+                          ↗
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.button>
             </motion.div>
           </motion.div>
         ))}
