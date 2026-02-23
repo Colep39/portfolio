@@ -79,8 +79,7 @@ const Hero = () => {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-300/90 md:mx-0"
           >
-            I build clean, scalable apps and data-driven systems—focused on
-            performance, maintainability, and great UX.
+            I architect scalable software systems and data solutions designed for performance, resilience, and maintainable design.
           </motion.p>
 
           {/* CTA Buttons */}
