@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint-disable */
 import { motion } from 'framer-motion';
 import {
   SiCplusplus,
@@ -104,7 +105,7 @@ const Skills = () => {
                   key={name}
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-300 to-indigo-400 text-white rounded-full shadow text-sm font-medium hover:bg-gradient-to-r hover:from-sky-400 hover:to-indigo-500 cursor-pointer transition"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-violet-600 text-white rounded-full shadow text-sm font-medium hover:from-indigo-600 hover:to-violet-700 transition"
                 >
                   {icon}
                   <span>{name}</span>

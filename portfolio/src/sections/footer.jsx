@@ -25,7 +25,7 @@ const Footer = () => {
             href="https://github.com/colep39"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-sky-400 transition-transform duration-300 hover:scale-110"
+            className="hover:text-indigo-400 transition-transform duration-300 hover:scale-110"
           >
             <FaGithub />
           </a>
@@ -39,7 +39,7 @@ const Footer = () => {
           </a>
           <a
             href="mailto:colep3@icloud.com"
-            className="hover:text-sky-400 transition-transform duration-300 hover:scale-110"
+            className="hover:text-green-400 transition-transform duration-300 hover:scale-110"
           >
             <FaEnvelope />
           </a>

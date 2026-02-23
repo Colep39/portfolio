@@ -12,7 +12,7 @@ const NavBar = ({ toggleModal }) => {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <a
           href="#hero"
-          className="text-2xl font-bold text-sky-600 hover:text-sky-500 transition-colors"
+          className="text-2xl font-bold text-violet-600 hover:text-violet-500 transition-colors"
           onClick={handleLinkClick}
         >
           Cole Plagens
@@ -20,15 +20,15 @@ const NavBar = ({ toggleModal }) => {
 
         {/* Desktop links */}
         <ul className="hidden md:flex space-x-6 text-gray-700 font-semibold tracking-wide">
-          <li><a href="#about" className="hover:text-sky-500">About</a></li>
-          <li><a href="#skills" className="hover:text-sky-500">Skills</a></li>
-          <li><a href="#projects" className="hover:text-sky-500">Projects</a></li>
-          <li><button onClick={toggleModal} className="hover:text-sky-500 cursor-pointer">Contact</button></li>
-          <li><a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-sky-500">Resume</a></li>
+          <li><a href="#about" className="hover:text-violet-500">About</a></li>
+          <li><a href="#skills" className="hover:text-violet-500">Skills</a></li>
+          <li><a href="#projects" className="hover:text-violet-500">Projects</a></li>
+          <li><button onClick={toggleModal} className="hover:text-violet-500 cursor-pointer">Contact</button></li>
+          <li><a href="/cole_plagens_resume.pdf" target="_blank" className="hover:text-violet-500">Resume</a></li>
         </ul>
 
         {/* Mobile hamburger */}
-        <button onClick={handleToggle} className="md:hidden text-sky-600 focus:outline-none">
+        <button onClick={handleToggle} className="md:hidden text-violet-600 focus:outline-none">
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
