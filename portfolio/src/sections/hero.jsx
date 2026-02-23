@@ -79,7 +79,7 @@ const Hero = () => {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-300/90 md:mx-0"
           >
-            I architect scalable software systems and data solutions designed for performance, resilience, and maintainable design.
+            I architect scalable software systems and data solutions designed for performance, maintainability, and robustness.
           </motion.p>
 
           {/* CTA Buttons */}
