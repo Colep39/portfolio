@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="relative w-full m-0 p-0 py-8 flex flex-col items-center justify-center text-gray-700 bg-white overflow-hidden"
+      className="relative w-full m-0 p-0 py-8 flex flex-col items-center justify-center text-gray-700 bg-slate-950 overflow-hidden"
     >
       <div
         className="absolute inset-0 opacity-20 pointer-events-none"

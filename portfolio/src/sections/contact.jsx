@@ -60,7 +60,7 @@ const ContactModal = ({ toggleModal }) => {
         </button>
 
         {/* Title */}
-        <h1 className="text-3xl font-bold text-sky-700 mb-6 text-center">
+        <h1 className="text-3xl font-bold text-violet-700 mb-6 text-center">
           Contact Me
         </h1>
 
@@ -75,26 +75,26 @@ const ContactModal = ({ toggleModal }) => {
             name="user_name"
             placeholder="Your Name"
             required
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
           />
           <input
             type="email"
             name="user_email"
             placeholder="Your Email"
             required
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-400"
           />
           <textarea
             name="message"
             rows="5"
             placeholder="Your Message"
             required
-            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:violet-sky-400"
           />
           <button
             type="submit"
             disabled={sending}
-            className="w-full bg-sky-500 text-white font-semibold py-3 rounded-lg hover:bg-sky-600 transition cursor-pointer"
+            className="w-full bg-violet-500 text-white font-semibold py-3 rounded-lg hover:bg-violet-600 transition cursor-pointer"
           >
             {sending ? 'Sending...' : 'Send Message'}
           </button>
@@ -105,18 +105,18 @@ const ContactModal = ({ toggleModal }) => {
           Or email me directly at{' '}
           <a
             href="mailto:colep3@icloud.com"
-            className="text-sky-600 underline hover:text-sky-800 transition"
+            className="text-violet-600 underline hover:text-violet-800 transition"
           >
             cbplagen@outlook.com
           </a>
         </p>
 
-        <div className="mt-6 flex justify-center gap-8 text-sky-700 text-2xl">
+        <div className="mt-6 flex justify-center gap-8 text-violet-700 text-2xl">
           <a
             href="https://www.linkedin.com/in/cole-plagens/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-sky-500 transition"
+            className="hover:text-violet-500 transition"
           >
             <FaLinkedin />
           </a>
@@ -124,7 +124,7 @@ const ContactModal = ({ toggleModal }) => {
             href="https://github.com/colep39"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-sky-500 transition"
+            className="hover:text-violet-500 transition"
           >
             <FaGithub />
           </a>

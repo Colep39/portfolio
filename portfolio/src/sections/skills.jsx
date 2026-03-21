@@ -89,7 +89,7 @@ const Skills = () => {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="bg-gray-800/70 border border-gray-700 backdrop-blur-sm rounded-xl shadow-xl p-6 transition duration-300 ease-in-out hover:shadow-2xl hover:border-sky-500 hover:scale-[1.02]"
+            className="bg-gray-800/70 border border-gray-700 backdrop-blur-sm rounded-xl shadow-xl p-6 transition duration-300 ease-in-out hover:shadow-2xl hover:border-violet-500 hover:scale-[1.02]"
           >
             <h2 className="text-2xl font-semibold text-gray-200 mb-4 text-center">
               {category}
