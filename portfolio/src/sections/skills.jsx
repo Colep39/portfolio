@@ -5,7 +5,6 @@ import {
   SiCplusplus,
   SiPython,
   SiHtml5,
-  SiCss3,
   SiJavascript,
   SiMysql,
   SiReact,
@@ -13,15 +12,13 @@ import {
   SiTailwindcss,
   SiExpress,
   SiGithub,
-  SiVite,
-  SiNpm,
   SiNextdotjs,
   SiTypescript,
   SiDotnet,
 } from 'react-icons/si';
-import { FaAws, FaJenkins } from 'react-icons/fa';
+import { FaAws, FaJenkins, FaCss3Alt } from 'react-icons/fa';
 import { VscAzure } from "react-icons/vsc";
-import { DiDocker} from 'react-icons/di';
+import { DiDocker, DiRedis} from 'react-icons/di';
 import { BiLogoVisualStudio } from "react-icons/bi";
 
 const skills = {
@@ -29,7 +26,7 @@ const skills = {
     { name: 'C++', icon: <SiCplusplus size={20} /> },
     { name: 'Python', icon: <SiPython size={20} /> },
     { name: 'HTML', icon: <SiHtml5 size={20} /> },
-    { name: 'CSS', icon: <SiCss3 size={20} /> },
+    { name: 'CSS', icon: <FaCss3Alt size={20} /> },
     { name: 'JavaScript', icon: <SiJavascript size={20} /> },
     { name: 'TypeScript', icon: <SiTypescript size={20} /> },
     { name: 'SQL', icon: <SiMysql size={20} /> },
@@ -47,12 +44,11 @@ const skills = {
   Tools: [
     { name: 'VS Code', icon: <BiLogoVisualStudio size={20} /> },
     { name: 'GitHub', icon: <SiGithub size={20} /> },
-    { name: 'Vite', icon: <SiVite size={20} /> },
-    { name: 'npm', icon: <SiNpm size={20} /> },
     { name: 'Docker', icon: <DiDocker size={20} /> },
     { name: 'Jenkins', icon: <FaJenkins size={20} /> },
     { name: 'AWS', icon: <FaAws size={20} /> },
     { name: 'Azure', icon: <VscAzure size={20} /> },
+    { name: 'Redis', icon: <DiRedis size={20} /> },
 
   ],
 };
