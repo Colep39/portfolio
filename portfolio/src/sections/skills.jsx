@@ -15,8 +15,14 @@ import {
   SiNextdotjs,
   SiTypescript,
   SiDotnet,
+  SiGo,
+  SiSpringboot,
+  SiNumpy,
+  SiPandas,
+  SiClaude,
+  SiPostman,
 } from 'react-icons/si';
-import { FaAws, FaJenkins, FaCss3Alt } from 'react-icons/fa';
+import { FaAws, FaJenkins, FaCss3Alt, FaJava } from 'react-icons/fa';
 import { VscAzure } from "react-icons/vsc";
 import { DiDocker, DiRedis} from 'react-icons/di';
 import { BiLogoVisualStudio } from "react-icons/bi";
@@ -29,6 +35,9 @@ const skills = {
     { name: 'CSS', icon: <FaCss3Alt size={20} /> },
     { name: 'JavaScript', icon: <SiJavascript size={20} /> },
     { name: 'TypeScript', icon: <SiTypescript size={20} /> },
+    { name: 'C#', icon: <SiDotnet size={20} /> },
+    { name: 'Java', icon: <FaJava size={20} /> },
+    { name: 'Go', icon: <SiGo size={20} /> },
     { name: 'SQL', icon: <SiMysql size={20} /> },
 
   ],
@@ -36,9 +45,11 @@ const skills = {
     { name: 'React', icon: <SiReact size={20} /> },
     { name: 'Node.js', icon: <SiNodedotjs size={20} /> },
     { name: 'ASP.NET', icon: <SiDotnet size={20} /> },
-    { name: 'Tailwind CSS', icon: <SiTailwindcss size={20} /> },
+    { name: 'Spring Boot', icon: <SiSpringboot size={20} /> },
     { name: 'Express', icon: <SiExpress size={20} /> },
-    { name: 'Next.js', icon: <SiNextdotjs size={20} /> },
+    { name: 'NumPy', icon: <SiNumpy size={20} /> },
+    { name: 'Pandas', icon: <SiPandas size={20} /> },
+    { name: 'Tailwind CSS', icon: <SiTailwindcss size={20} /> },
 
   ],
   Tools: [
@@ -48,7 +59,8 @@ const skills = {
     { name: 'Jenkins', icon: <FaJenkins size={20} /> },
     { name: 'AWS', icon: <FaAws size={20} /> },
     { name: 'Azure', icon: <VscAzure size={20} /> },
-    { name: 'Redis', icon: <DiRedis size={20} /> },
+    { name: 'Postman', icon: <SiPostman size={20} /> },
+    { name: 'Claude', icon: <SiClaude size={20} /> },
 
   ],
 };
