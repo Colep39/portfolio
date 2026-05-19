@@ -12,96 +12,316 @@ const roles = [
   "System Minded",
 ];
 
+const dots = [
+  { x: 6,  y: 18, size: 2,   opacity: 0.25 },
+  { x: 93, y: 12, size: 1.5, opacity: 0.2  },
+  { x: 2,  y: 72, size: 1,   opacity: 0.2  },
+  { x: 97, y: 58, size: 2,   opacity: 0.15 },
+  { x: 52, y: 5,  size: 1.5, opacity: 0.18 },
+  { x: 18, y: 92, size: 1,   opacity: 0.15 },
+  { x: 82, y: 88, size: 2,   opacity: 0.18 },
+];
+
+function Cursor() {
+  const [on, setOn] = useState(true);
+  useEffect(() => {
+    const id = setInterval(() => setOn(v => !v), 530);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span style={{
+      display: "inline-block",
+      width: 3,
+      height: "0.75em",
+      marginLeft: 6,
+      borderRadius: 2,
+      verticalAlign: "middle",
+      background: on ? "#7C6FFF" : "transparent",
+      transition: "background 0.1s",
+    }} />
+  );
+}
+
+function CTAButton({ href, primary, children }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <a
+      href={href}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "12px 28px",
+        borderRadius: 10,
+        fontSize: 14,
+        fontWeight: 600,
+        letterSpacing: "0.01em",
+        textDecoration: "none",
+        transition: "all 0.2s ease",
+        cursor: "pointer",
+        transform: hovered ? "translateY(-2px)" : "none",
+        ...(primary ? {
+          background: hovered
+            ? "linear-gradient(135deg, #8B7FFF, #00E4B8)"
+            : "linear-gradient(135deg, #7C6FFF, #00D4AA)",
+          color: "#fff",
+          border: "1px solid transparent",
+          boxShadow: hovered ? "0 0 28px rgba(124,111,255,0.45)" : "none",
+        } : {
+          background: hovered ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.03)",
+          color: hovered ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)",
+          border: hovered ? "1px solid rgba(255,255,255,0.18)" : "1px solid rgba(255,255,255,0.08)",
+        }),
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
+function ScrollHint() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 2, duration: 0.8 }}
+      style={{
+        position: "absolute",
+        bottom: 40,
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 8,
+        zIndex: 10,
+        pointerEvents: "none",
+      }}
+    >
+      <span style={{
+        fontFamily: "'Courier New', monospace",
+        fontSize: 10,
+        letterSpacing: "0.2em",
+        color: "rgba(255,255,255,0.25)",
+        textTransform: "uppercase",
+      }}>Scroll</span>
+      <motion.div
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          width: 1,
+          height: 32,
+          background: "linear-gradient(180deg, rgba(124,111,255,0.6), transparent)",
+        }}
+      />
+    </motion.div>
+  );
+}
+
 const Hero = () => {
-  const [index, setIndex] = useState(0);
-  const name = "Cole";
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
-    return () => clearInterval(interval);
+    const id = setInterval(() => setRoleIndex(i => (i + 1) % roles.length), 2600);
+    return () => clearInterval(id);
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-screen w-full">
-      <div className="relative mx-auto flex min-h-screen max-w-6xl items-center px-6 sm:px-12">
-        <div className="w-full text-center md:text-left">
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: "easeOut" }}
-            className="text-5xl sm:text-7xl font-extrabold tracking-tight text-slate-100"
-          >
-            Hey, I’m{" "}
-            <span className="name-shimmer inline-flex">
-              {name.split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 44, scale: 0.92 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    delay: 0.25 + i * 0.08,
-                    type: "spring",
-                    damping: 12,
-                    stiffness: 150,
-                  }}
-                  className="inline-block bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent"
-                  style={{ willChange: "transform" }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-          </motion.h1>
+    <section
+      id="hero"
+      style={{
+        position: "relative",
+        width: "100%",
+        minHeight: "100vh",
+        background: "#080810",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        boxSizing: "border-box",
+      }}
+    >
+      {/* Grid */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)`,
+        backgroundSize: "60px 60px",
+      }} />
 
-          {/* Rotating Role Text */}
-          <div className="mt-3 h-10 sm:h-12">
-            <AnimatePresence mode="wait">
-              <motion.h2
-                key={roles[index]}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.5 }}
-                className="text-xl sm:text-3xl font-semibold text-slate-300"
-              >
-                {roles[index]}
-              </motion.h2>
-            </AnimatePresence>
-          </div>
+      {/* Vignette */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, #080810 100%)",
+      }} />
 
-          {/* Supporting line */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-300/90 md:mx-0"
-          >
-            I architect scalable software systems and data solutions designed for performance, maintainability, and robustness.
-          </motion.p>
+      {/* Blobs */}
+      <div style={{
+        position: "absolute", top: "-10%", left: "-8%", width: 600, height: 600,
+        borderRadius: "50%", pointerEvents: "none",
+        background: "radial-gradient(circle, rgba(124,111,255,0.09) 0%, transparent 65%)",
+      }} />
+      <div style={{
+        position: "absolute", bottom: "-5%", right: "-5%", width: 480, height: 480,
+        borderRadius: "50%", pointerEvents: "none",
+        background: "radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 65%)",
+      }} />
 
-          {/* CTA Buttons */}
-          <div className="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-            <a
-              href="#projects"
-              className="group relative inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-lg transition will-change-transform hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+      {/* Dots */}
+      {dots.map((d, i) => (
+        <div key={i} style={{
+          position: "absolute", left: `${d.x}%`, top: `${d.y}%`,
+          width: d.size, height: d.size, borderRadius: "50%",
+          background: "rgba(255,255,255,0.7)", opacity: d.opacity, pointerEvents: "none",
+        }} />
+      ))}
+
+      {/* Content */}
+      <div style={{
+        position: "relative", zIndex: 10,
+        maxWidth: 900, width: "100%", padding: "0 32px",
+        display: "flex", flexDirection: "column",
+        boxSizing: "border-box",
+      }}>
+
+        {/* Hey I'm */}
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: 13,
+            letterSpacing: "0.14em",
+            color: "rgba(255,255,255,0.35)",
+            textTransform: "uppercase",
+            marginBottom: 14,
+            display: "block",
+          }}
+        >
+          Hey, I'm
+        </motion.span>
+
+        {/* Name — rendered as a single block, no per-letter spans */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            margin: "0 0 22px 0",
+            padding: "0 0 8px 0",
+            fontSize: "clamp(54px, 9vw, 108px)",
+            fontWeight: 900,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.15,
+            overflow: "visible",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <span style={{
+            background: "linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.6) 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>Cole </span><span style={{
+            background: "linear-gradient(135deg, #7C6FFF 0%, #00D4AA 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}>Plagens</span>
+          <Cursor />
+        </motion.h1>
+
+        {/* Rotating role */}
+        <div style={{ height: 48, marginBottom: 24, display: "flex", alignItems: "center" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={roles[roleIndex]}
+              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -16, filter: "blur(4px)" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              style={{ display: "flex", alignItems: "center", gap: 12 }}
             >
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 transition group-hover:from-indigo-600 group-hover:to-violet-700" />
-              <span className="absolute inset-0 rounded-full opacity-0 blur-xl bg-gradient-to-r from-indigo-500/50 to-violet-600/50 transition group-hover:opacity-100" />
-              <span className="relative">View My Work</span>
-            </a>
-
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-slate-200/90 ring-1 ring-white/15 bg-white/5 backdrop-blur-sm shadow transition hover:bg-white/10 hover:ring-white/25 hover:scale-[1.03] will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/60"
-            >
-              About Me
-            </a>
-          </div>
+              <div style={{
+                width: 24, height: 2, flexShrink: 0, borderRadius: 2,
+                background: "linear-gradient(90deg, #7C6FFF, #00D4AA)",
+              }} />
+              <span style={{
+                fontSize: "clamp(18px, 2.5vw, 28px)",
+                fontWeight: 600,
+                letterSpacing: "-0.02em",
+                color: "rgba(255,255,255,0.7)",
+              }}>
+                {roles[roleIndex]}
+              </span>
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          style={{
+            margin: "0 0 44px",
+            maxWidth: 520,
+            fontSize: 16,
+            lineHeight: 1.8,
+            color: "rgba(255,255,255,0.4)",
+            fontWeight: 400,
+          }}
+        >
+          I architect scalable software systems and data solutions designed for{" "}
+          <span style={{ color: "rgba(255,255,255,0.75)" }}>performance</span>,{" "}
+          <span style={{ color: "rgba(255,255,255,0.75)" }}>maintainability</span>, and{" "}
+          <span style={{ color: "rgba(255,255,255,0.75)" }}>robustness</span>.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+          style={{ display: "flex", flexWrap: "wrap", gap: 12 }}
+        >
+          <CTAButton href="#projects" primary>
+            View My Work
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginLeft: 6 }}>
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </CTAButton>
+          <CTAButton href="#about">About Me</CTAButton>
+        </motion.div>
+
+        {/* Legend */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          style={{ marginTop: 64, display: "flex", alignItems: "center", gap: 20 }}
+        >
+          {[
+            { color: "#7C6FFF", label: "Languages" },
+            { color: "#00D4AA", label: "Frameworks" },
+            { color: "#FF6B6B", label: "Tools" },
+          ].map(({ color, label }) => (
+            <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: color, opacity: 0.7 }} />
+              <span style={{
+                fontFamily: "'Courier New', monospace",
+                fontSize: 10,
+                letterSpacing: "0.1em",
+                color: "rgba(255,255,255,0.25)",
+                textTransform: "uppercase",
+              }}>{label}</span>
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      <ScrollHint />
     </section>
   );
 };

@@ -1,128 +1,417 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 /* eslint-disable */
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import {
-  SiCplusplus,
-  SiPython,
-  SiHtml5,
-  SiJavascript,
-  SiMysql,
-  SiReact,
-  SiNodedotjs,
-  SiTailwindcss,
-  SiExpress,
-  SiGithub,
-  SiNextdotjs,
-  SiTypescript,
-  SiDotnet,
-  SiGo,
-  SiSpringboot,
-  SiNumpy,
-  SiPandas,
-  SiClaude,
-  SiPostman,
+  SiCplusplus, SiPython, SiHtml5, SiJavascript, SiMysql, SiReact,
+  SiNodedotjs, SiTailwindcss, SiExpress, SiGithub, SiNextdotjs,
+  SiTypescript, SiDotnet, SiGo, SiSpringboot, SiNumpy, SiPandas,
+  SiClaude, SiPostman,
 } from 'react-icons/si';
 import { FaAws, FaJenkins, FaCss3Alt, FaJava } from 'react-icons/fa';
-import { VscAzure } from "react-icons/vsc";
-import { DiDocker, DiRedis} from 'react-icons/di';
-import { BiLogoVisualStudio } from "react-icons/bi";
+import { VscAzure } from 'react-icons/vsc';
+import { DiDocker, DiRedis } from 'react-icons/di';
+import { BiLogoVisualStudio } from 'react-icons/bi';
 
 const skills = {
-  Languages: [
-    { name: 'C++', icon: <SiCplusplus size={20} /> },
-    { name: 'Python', icon: <SiPython size={20} /> },
-    { name: 'HTML', icon: <SiHtml5 size={20} /> },
-    { name: 'CSS', icon: <FaCss3Alt size={20} /> },
-    { name: 'JavaScript', icon: <SiJavascript size={20} /> },
-    { name: 'TypeScript', icon: <SiTypescript size={20} /> },
-    { name: 'C#', icon: <SiDotnet size={20} /> },
-    { name: 'Java', icon: <FaJava size={20} /> },
-    { name: 'Go', icon: <SiGo size={20} /> },
-    { name: 'SQL', icon: <SiMysql size={20} /> },
-
-  ],
-  'Frameworks/Libraries': [
-    { name: 'React', icon: <SiReact size={20} /> },
-    { name: 'Node.js', icon: <SiNodedotjs size={20} /> },
-    { name: 'ASP.NET', icon: <SiDotnet size={20} /> },
-    { name: 'Spring Boot', icon: <SiSpringboot size={20} /> },
-    { name: 'Express', icon: <SiExpress size={20} /> },
-    { name: 'NumPy', icon: <SiNumpy size={20} /> },
-    { name: 'Pandas', icon: <SiPandas size={20} /> },
-    { name: 'Tailwind CSS', icon: <SiTailwindcss size={20} /> },
-
-  ],
-  Tools: [
-    { name: 'VS Code', icon: <BiLogoVisualStudio size={20} /> },
-    { name: 'GitHub', icon: <SiGithub size={20} /> },
-    { name: 'Docker', icon: <DiDocker size={20} /> },
-    { name: 'Jenkins', icon: <FaJenkins size={20} /> },
-    { name: 'AWS', icon: <FaAws size={20} /> },
-    { name: 'Azure', icon: <VscAzure size={20} /> },
-    { name: 'Postman', icon: <SiPostman size={20} /> },
-    { name: 'Claude', icon: <SiClaude size={20} /> },
-
-  ],
+  Languages: {
+    accent: '#7C6FFF',
+    glow: 'rgba(124,111,255,0.15)',
+    border: 'rgba(124,111,255,0.3)',
+    label: '01',
+    items: [
+      { name: 'C++', icon: <SiCplusplus /> },
+      { name: 'Python', icon: <SiPython /> },
+      { name: 'HTML', icon: <SiHtml5 /> },
+      { name: 'CSS', icon: <FaCss3Alt /> },
+      { name: 'JavaScript', icon: <SiJavascript /> },
+      { name: 'TypeScript', icon: <SiTypescript /> },
+      { name: 'C#', icon: <SiDotnet /> },
+      { name: 'Java', icon: <FaJava /> },
+      { name: 'Go', icon: <SiGo /> },
+      { name: 'SQL', icon: <SiMysql /> },
+    ],
+  },
+  'Frameworks & Libraries': {
+    accent: '#00D4AA',
+    glow: 'rgba(0,212,170,0.12)',
+    border: 'rgba(0,212,170,0.3)',
+    label: '02',
+    items: [
+      { name: 'React', icon: <SiReact /> },
+      { name: 'Node.js', icon: <SiNodedotjs /> },
+      { name: 'ASP.NET', icon: <SiDotnet /> },
+      { name: 'Spring Boot', icon: <SiSpringboot /> },
+      { name: 'Express', icon: <SiExpress /> },
+      { name: 'NumPy', icon: <SiNumpy /> },
+      { name: 'Pandas', icon: <SiPandas /> },
+      { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+    ],
+  },
+  Tools: {
+    accent: '#FF6B6B',
+    glow: 'rgba(255,107,107,0.12)',
+    border: 'rgba(255,107,107,0.3)',
+    label: '03',
+    items: [
+      { name: 'VS Code', icon: <BiLogoVisualStudio /> },
+      { name: 'GitHub', icon: <SiGithub /> },
+      { name: 'Docker', icon: <DiDocker /> },
+      { name: 'Jenkins', icon: <FaJenkins /> },
+      { name: 'AWS', icon: <FaAws /> },
+      { name: 'Azure', icon: <VscAzure /> },
+      { name: 'Postman', icon: <SiPostman /> },
+      { name: 'Claude', icon: <SiClaude /> },
+    ],
+  },
 };
 
+/* ── Animated counter for skill count ── */
+function Counter({ to, accent }) {
+  const [val, setVal] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const step = Math.ceil(to / 30);
+    const id = setInterval(() => {
+      start += step;
+      if (start >= to) { setVal(to); clearInterval(id); }
+      else setVal(start);
+    }, 30);
+    return () => clearInterval(id);
+  }, [inView, to]);
+  return (
+    <span ref={ref} style={{ color: accent, fontFamily: "'Courier New', monospace", fontSize: 11, fontWeight: 700 }}>
+      {String(val).padStart(2, '0')}
+    </span>
+  );
+}
+
+/* ── Single skill pill ── */
+function SkillPill({ name, icon, accent, delay }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35, delay, ease: 'backOut' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8,
+        padding: '8px 14px',
+        borderRadius: 8,
+        border: hovered ? `1px solid ${accent}` : '1px solid rgba(255,255,255,0.08)',
+        background: hovered ? `${accent}18` : 'rgba(255,255,255,0.03)',
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.65)',
+        fontSize: 13,
+        fontWeight: 500,
+        cursor: 'default',
+        transition: 'all 0.2s ease',
+        letterSpacing: '0.01em',
+        userSelect: 'none',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      <span style={{
+        fontSize: 15,
+        color: hovered ? accent : 'rgba(255,255,255,0.45)',
+        transition: 'color 0.2s',
+        display: 'flex',
+        alignItems: 'center',
+      }}>
+        {icon}
+      </span>
+      {name}
+    </motion.div>
+  );
+}
+
+/* ── Category card ── */
+function CategoryCard({ category, data, cardIndex }) {
+  const { accent, glow, border, label, items } = data;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: cardIndex * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        position: 'relative',
+        borderRadius: 20,
+        border: `1px solid ${border}`,
+        background: `linear-gradient(135deg, rgba(15,15,20,0.95) 0%, rgba(20,18,30,0.9) 100%)`,
+        padding: '36px 32px 32px',
+        overflow: 'hidden',
+        backdropFilter: 'blur(12px)',
+      }}
+    >
+      {/* Ambient glow top-right */}
+      <div style={{
+        position: 'absolute',
+        top: -60,
+        right: -60,
+        width: 200,
+        height: 200,
+        borderRadius: '50%',
+        background: glow,
+        filter: 'blur(40px)',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Corner accent line */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: 60,
+        height: 3,
+        background: `linear-gradient(90deg, ${accent}, transparent)`,
+        borderRadius: '0 0 3px 0',
+      }} />
+
+      {/* Header row */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
+        <div>
+          {/* Index label */}
+          <div style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: 11,
+            letterSpacing: '0.15em',
+            color: accent,
+            marginBottom: 6,
+            opacity: 0.8,
+          }}>
+            {label} ──
+          </div>
+          <h2 style={{
+            margin: 0,
+            fontSize: 22,
+            fontWeight: 700,
+            color: '#fff',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+          }}>
+            {category}
+          </h2>
+        </div>
+
+        {/* Count badge */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'rgba(255,255,255,0.04)',
+          border: `1px solid rgba(255,255,255,0.08)`,
+          borderRadius: 10,
+          padding: '8px 14px',
+        }}>
+          <Counter to={items.length} accent={accent} />
+          <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', marginTop: 2 }}>SKILLS</span>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div style={{
+        height: 1,
+        background: `linear-gradient(90deg, ${accent}40, transparent)`,
+        marginBottom: 24,
+      }} />
+
+      {/* Pills grid */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        {items.map(({ name, icon }, i) => (
+          <SkillPill
+            key={name}
+            name={name}
+            icon={icon}
+            accent={accent}
+            delay={cardIndex * 0.1 + i * 0.04}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Floating particle dot ── */
+function Dot({ x, y, size, opacity }) {
+  return (
+    <div style={{
+      position: 'absolute',
+      left: `${x}%`,
+      top: `${y}%`,
+      width: size,
+      height: size,
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,0.6)',
+      opacity,
+      pointerEvents: 'none',
+    }} />
+  );
+}
+
+const dots = [
+  { x: 8, y: 15, size: 2, opacity: 0.3 },
+  { x: 92, y: 10, size: 1.5, opacity: 0.2 },
+  { x: 3, y: 70, size: 1, opacity: 0.25 },
+  { x: 96, y: 60, size: 2, opacity: 0.15 },
+  { x: 50, y: 4, size: 1.5, opacity: 0.2 },
+  { x: 20, y: 90, size: 1, opacity: 0.15 },
+  { x: 80, y: 88, size: 2, opacity: 0.2 },
+];
+
+/* ── Main Skills section ── */
 const Skills = () => {
   return (
     <section
       id="skills"
-      className="relative w-full min-h-screen m-0 p-0 px-4 sm:px-8 flex flex-col items-center justify-center text-white overflow-hidden"
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '100px 24px',
+        background: '#080810',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+      }}
     >
-      {/* Subtle glow overlay */}
-      <div
-        className="absolute inset-0 opacity-25 pointer-events-none"
-      ></div>
+      {/* Background grid */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        backgroundImage: `
+          linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px',
+        pointerEvents: 'none',
+      }} />
 
-      {/* Section Title */}
-      <h1 className="text-3xl sm:text-4xl font-bold animated-gradient-text mb-14">
+      {/* Radial vignette */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #080810 100%)',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Large purple ambient blob */}
+      <div style={{
+        position: 'absolute',
+        top: '10%',
+        left: '-10%',
+        width: 500,
+        height: 500,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(124,111,255,0.08) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+      {/* Teal ambient blob */}
+      <div style={{
+        position: 'absolute',
+        bottom: '5%',
+        right: '-5%',
+        width: 400,
+        height: 400,
+        borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Floating dots */}
+      {dots.map((d, i) => <Dot key={i} {...d} />)}
+
+      {/* ── Section header ── */}
+      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', marginBottom: 72 }}>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 10,
+            marginBottom: 18,
+          }}
+        >
+          <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
+          <span style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: 11,
+            letterSpacing: '0.2em',
+            color: 'rgba(255,255,255,0.4)',
+            textTransform: 'uppercase',
+          }}>
+            Technical Expertise
+          </span>
+          <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{
+            margin: 0,
+            fontSize: 'clamp(40px, 6vw, 72px)',
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
+            lineHeight: 1,
+            background: 'linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.45) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
           My Skills
-      </h1>
+        </motion.h1>
 
-      {/* Skills Grid */}
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          visible: {
-            transition: { staggerChildren: 0.2 },
-          },
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          style={{
+            margin: '18px auto 0',
+            width: 48,
+            height: 3,
+            background: 'linear-gradient(90deg, #7C6FFF, #00D4AA)',
+            borderRadius: 3,
+            transformOrigin: 'left',
+          }}
+        />
+      </div>
+
+      {/* ── Cards grid ── */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: 24,
+          width: '100%',
+          maxWidth: 1100,
         }}
       >
-        {Object.entries(skills).map(([category, items]) => (
-          <motion.div
-            key={category}
-            variants={{
-              hidden: { opacity: 0, y: 40 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="bg-gray-800/70 border border-gray-700 backdrop-blur-sm rounded-xl shadow-xl p-6 transition duration-300 ease-in-out hover:shadow-2xl hover:border-violet-500 hover:scale-[1.02]"
-          >
-            <h2 className="text-2xl font-semibold text-gray-200 mb-4 text-center">
-              {category}
-            </h2>
-
-            <div className="flex flex-wrap justify-center gap-3">
-              {items.map(({ name, icon }) => (
-                <motion.div
-                  key={name}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-violet-600 text-white rounded-full shadow text-sm font-medium hover:from-indigo-600 hover:to-violet-700 transition"
-                >
-                  {icon}
-                  <span>{name}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        {Object.entries(skills).map(([category, data], i) => (
+          <CategoryCard key={category} category={category} data={data} cardIndex={i} />
         ))}
-      </motion.div>
+      </div>
+
+      
     </section>
   );
 };

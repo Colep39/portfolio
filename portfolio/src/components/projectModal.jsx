@@ -2,14 +2,8 @@
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import {
-  SiReact,
-  SiNodedotjs,
-  SiExpress,
-  SiMysql,
-  SiPostgresql,
-  SiJavascript,
-  SiTypescript,
-  SiDotnet,
+  SiReact, SiNodedotjs, SiExpress, SiMysql,
+  SiPostgresql, SiJavascript, SiTypescript, SiDotnet,
 } from 'react-icons/si';
 import { FaCode, FaAws } from 'react-icons/fa';
 
@@ -25,163 +19,209 @@ const techIcons = {
   AWS: FaAws,
 };
 
-function mod(n, m) {
-  return ((n % m) + m) % m;
-}
+const TECH_COLORS = {
+  React: '#38bdf8',
+  'Node.js': '#4ade80',
+  Express: '#d1d5db',
+  MySQL: '#60a5fa',
+  PostgreSQL: '#818cf8',
+  JavaScript: '#facc15',
+  'C#': '#a78bfa',
+  TypeScript: '#60a5fa',
+  AWS: '#fb923c',
+  Docker: '#38bdf8',
+};
+
+function mod(n, m) { return ((n % m) + m) % m; }
 
 const ProjectModal = ({ project, onClose }) => {
   const [[index, direction], setIndex] = useState([0, 0]);
   const total = project?.images?.length ?? 0;
 
-  const paginate = (newDirection) => {
+  const paginate = (dir) => {
     if (!total) return;
-    setIndex(([prev]) => [mod(prev + newDirection, total), newDirection]);
+    setIndex(([prev]) => [mod(prev + dir, total), dir]);
   };
 
-  // Preload/Decode neighboring images to remove stutter between transitions
+  // Preload neighbors
   useEffect(() => {
     if (!total) return;
-
-    const neighbors = [
-      project.images[mod(index - 1, total)],
-      project.images[index],
-      project.images[mod(index + 1, total)],
-    ];
-
     let cancelled = false;
-
-    neighbors.forEach((src) => {
+    [mod(index - 1, total), index, mod(index + 1, total)].forEach((i) => {
+      const src = project.images[i];
       if (!src) return;
       const img = new Image();
       img.src = src;
-
-      // decode() helps avoid a decode jank right when the image swaps (supported in modern browsers)
-      if (img.decode) {
-        img
-          .decode()
-          .catch(() => {})
-          .finally(() => {
-            if (cancelled) return;
-          });
-      }
+      if (img.decode) img.decode().catch(() => {});
     });
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [index, total, project]);
 
-  // Lock scroll while modal is open
+  // Lock scroll
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev || 'auto';
-    };
+    return () => { document.body.style.overflow = prev || 'auto'; };
   }, []);
 
-  // Fix: only bind keydown once (and update when index changes)
+  // Keyboard nav
   useEffect(() => {
-    const handleKey = (e) => {
+    const handler = (e) => {
       if (e.key === 'ArrowRight') paginate(1);
       if (e.key === 'ArrowLeft') paginate(-1);
       if (e.key === 'Escape') onClose();
     };
-
-    window.addEventListener('keydown', handleKey, { passive: true });
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener('keydown', handler, { passive: true });
+    return () => window.removeEventListener('keydown', handler);
   }, [index, total, onClose]);
 
-  const slideVariants = useMemo(
-    () => ({
-      enter: (dir) => ({
-        x: dir > 0 ? 260 : -260,
-        opacity: 0,
-        position: 'absolute',
-      }),
-      center: {
-        x: 0,
-        opacity: 1,
-        position: 'relative',
-      },
-      exit: (dir) => ({
-        x: dir > 0 ? -260 : 260,
-        opacity: 0,
-        position: 'absolute',
-      }),
-    }),
-    []
-  );
+  const slideVariants = useMemo(() => ({
+    enter: (dir) => ({ x: dir > 0 ? 280 : -280, opacity: 0, position: 'absolute' }),
+    center: { x: 0, opacity: 1, position: 'relative' },
+    exit: (dir) => ({ x: dir > 0 ? -280 : 280, opacity: 0, position: 'absolute' }),
+  }), []);
 
   if (!project) return null;
 
+  const accent = project.accent || '#7C6FFF';
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-20 bg-black/50 backdrop-blur-sm"
-      onMouseDown={(e) => {
-        // click outside to close
-        if (e.target === e.currentTarget) onClose();
+      onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 50,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px 16px',
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(14px)',
       }}
     >
-      <MotionConfig
-        transition={{
-          type: 'spring',
-          stiffness: 260,
-          damping: 26,
-          mass: 0.8,
-        }}
-      >
+      <MotionConfig transition={{ type: 'spring', stiffness: 260, damping: 26, mass: 0.8 }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: 18 }}
+          initial={{ opacity: 0, scale: 0.97, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.98, y: 18 }}
-          className="bg-white rounded-2xl w-full max-w-4xl relative p-6 shadow-2xl"
+          exit={{ opacity: 0, scale: 0.97, y: 20 }}
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: 860,
+            maxHeight: '90vh',
+            overflowY: 'auto',
+            borderRadius: 20,
+            border: '1px solid rgba(255,255,255,0.09)',
+            background: 'rgba(10,10,20,0.98)',
+            backdropFilter: 'blur(20px)',
+            padding: '36px 36px 32px',
+            boxSizing: 'border-box',
+          }}
         >
-          {/* Close button */}
+          {/* Top accent line */}
+          <div style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0,
+            height: 2,
+            borderRadius: '20px 20px 0 0',
+            background: `linear-gradient(90deg, ${accent}, transparent)`,
+          }} />
+
+          {/* Close */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-3xl font-bold transition"
             aria-label="Close modal"
-          >
-            ×
-          </button>
+            style={{
+              position: 'absolute',
+              top: 16, right: 16,
+              width: 32, height: 32,
+              borderRadius: 8,
+              border: '1px solid rgba(255,255,255,0.08)',
+              background: 'rgba(255,255,255,0.04)',
+              color: 'rgba(255,255,255,0.45)',
+              fontSize: 16,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s',
+              lineHeight: 1,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
+          >✕</button>
 
-          {/* Tech stack */}
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold text-indigo-600 mb-3">
-              Technologies Used
-            </h3>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              {project.techStack.map((tech) => {
-                const Icon = techIcons[tech] || FaCode;
-
-                return (
-                  <motion.div
-                    key={tech}
-                    whileHover={{ y: -3 }}
-                    className="
-                      flex items-center gap-2
-                      px-4 py-2 rounded-full
-                      bg-gradient-to-r from-sky-100 to-indigo-100
-                      text-indigo-800
-                      border border-sky-200
-                      shadow-sm
-                      cursor-default
-                      select-none
-                    "
-                    title={tech}
-                  >
-                    <Icon size={18} />
-                    <span className="text-sm font-medium">{tech}</span>
-                  </motion.div>
-                );
-              })}
+          {/* Project title + index */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={{
+              fontFamily: "'Courier New', monospace",
+              fontSize: 10,
+              letterSpacing: '0.15em',
+              color: accent,
+              marginBottom: 6,
+              opacity: 0.9,
+            }}>
+              {project.index || '──'} Project
             </div>
+            <h2 style={{
+              margin: 0,
+              fontSize: 22,
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              color: '#fff',
+            }}>
+              {project.title}
+            </h2>
           </div>
 
-          {/* Image carousel */}
-          <div className="relative w-full overflow-hidden rounded-xl aspect-video bg-gray-100">
+          {/* Divider */}
+          <div style={{
+            height: 1,
+            background: `linear-gradient(90deg, ${accent}40, transparent)`,
+            marginBottom: 24,
+          }} />
+
+          {/* Tech pills */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
+            {project.techStack.map((tech) => {
+              const Icon = techIcons[tech] || FaCode;
+              const color = TECH_COLORS[tech] || 'rgba(255,255,255,0.5)';
+              return (
+                <motion.div
+                  key={tech}
+                  whileHover={{ y: -2 }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    padding: '7px 13px',
+                    borderRadius: 8,
+                    border: `1px solid ${color}30`,
+                    background: `${color}10`,
+                    cursor: 'default',
+                    userSelect: 'none',
+                  }}
+                >
+                  <Icon style={{ color, fontSize: 14, flexShrink: 0 }} />
+                  <span style={{ fontSize: 12, fontWeight: 500, color: 'rgba(255,255,255,0.7)' }}>
+                    {tech}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Carousel */}
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            borderRadius: 14,
+            overflow: 'hidden',
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            aspectRatio: '16/9',
+          }}>
             <AnimatePresence initial={false} mode="popLayout" custom={direction}>
               <motion.img
                 key={project.images[index]}
@@ -192,45 +232,122 @@ const ProjectModal = ({ project, onClose }) => {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="w-full h-full object-cover rounded-xl select-none"
                 draggable={false}
                 loading="eager"
-                // drag feels nicer with spring + no "layout" shift
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.12}
                 onDragEnd={(_, info) => {
-                  const swipePower = Math.abs(info.offset.x) * info.velocity.x;
-                  if (info.offset.x > 120 || swipePower > 8000) paginate(-1);
-                  else if (info.offset.x < -120 || swipePower < -8000)
-                    paginate(1);
+                  const power = Math.abs(info.offset.x) * info.velocity.x;
+                  if (info.offset.x > 120 || power > 8000) paginate(-1);
+                  else if (info.offset.x < -120 || power < -8000) paginate(1);
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: 14,
+                  userSelect: 'none',
+                  display: 'block',
                 }}
               />
             </AnimatePresence>
 
             {/* Counter */}
-            <div className="absolute bottom-3 left-3 bg-black/45 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">
+            <div style={{
+              position: 'absolute',
+              bottom: 12, left: 12,
+              padding: '4px 12px',
+              borderRadius: 20,
+              background: 'rgba(0,0,0,0.6)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: 'rgba(255,255,255,0.8)',
+              fontSize: 11,
+              fontFamily: "'Courier New', monospace",
+              letterSpacing: '0.06em',
+            }}>
               {index + 1} / {total}
             </div>
 
-            {/* Left arrow */}
-            <button
-              onClick={() => paginate(-1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition z-10"
-              aria-label="Previous image"
-            >
-              ‹
-            </button>
+            {/* Arrows — only if multiple images */}
+            {total > 1 && (
+              <>
+                <button
+                  onClick={() => paginate(-1)}
+                  aria-label="Previous image"
+                  style={{
+                    position: 'absolute',
+                    left: 12, top: '50%', transform: 'translateY(-50%)',
+                    width: 36, height: 36, borderRadius: 10,
+                    background: 'rgba(0,0,0,0.55)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    color: '#fff',
+                    fontSize: 20,
+                    cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'all 0.2s',
+                    zIndex: 10,
+                    lineHeight: 1,
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = `${accent}33`; e.currentTarget.style.borderColor = `${accent}55`; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.55)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; }}
+                >‹</button>
 
-            {/* Right arrow */}
-            <button
-              onClick={() => paginate(1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition z-10"
-              aria-label="Next image"
-            >
-              ›
-            </button>
+                <button
+                  onClick={() => paginate(1)}
+                  aria-label="Next image"
+                  style={{
+                    position: 'absolute',
+                    right: 12, top: '50%', transform: 'translateY(-50%)',
+                    width: 36, height: 36, borderRadius: 10,
+                    background: 'rgba(0,0,0,0.55)',
+                    backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    color: '#fff',
+                    fontSize: 20,
+                    cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'all 0.2s',
+                    zIndex: 10,
+                    lineHeight: 1,
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = `${accent}33`; e.currentTarget.style.borderColor = `${accent}55`; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.55)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; }}
+                >›</button>
+              </>
+            )}
           </div>
+
+          {/* Dot indicators */}
+          {total > 1 && (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 6,
+              marginTop: 16,
+            }}>
+              {Array.from({ length: total }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex([i, i > index ? 1 : -1])}
+                  style={{
+                    width: i === index ? 20 : 6,
+                    height: 6,
+                    borderRadius: 3,
+                    border: 'none',
+                    background: i === index
+                      ? accent
+                      : 'rgba(255,255,255,0.15)',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
+                    padding: 0,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </motion.div>
       </MotionConfig>
     </div>
