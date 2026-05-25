@@ -295,30 +295,7 @@ const Hero = () => {
           <CTAButton href="#about">About Me</CTAButton>
         </motion.div>
 
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          style={{ marginTop: 64, display: "flex", alignItems: "center", gap: 20 }}
-        >
-          {[
-            { color: "#7C6FFF", label: "Languages" },
-            { color: "#00D4AA", label: "Frameworks" },
-            { color: "#FF6B6B", label: "Tools" },
-          ].map(({ color, label }) => (
-            <div key={label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <div style={{ width: 6, height: 6, borderRadius: "50%", background: color, opacity: 0.7 }} />
-              <span style={{
-                fontFamily: "'Courier New', monospace",
-                fontSize: 10,
-                letterSpacing: "0.1em",
-                color: "rgba(255,255,255,0.25)",
-                textTransform: "uppercase",
-              }}>{label}</span>
-            </div>
-          ))}
-        </motion.div>
+       
       </div>
 
       <ScrollHint />

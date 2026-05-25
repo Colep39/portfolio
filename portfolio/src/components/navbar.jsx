@@ -97,29 +97,7 @@ const NavBar = ({ toggleModal }) => {
               gap: 10,
             }}
           >
-            {/* Monogram mark */}
-            <div style={{
-              width: 32,
-              height: 32,
-              borderRadius: 8,
-              background: logoHovered
-                ? 'linear-gradient(135deg, #8B7FFF, #00E4B8)'
-                : 'linear-gradient(135deg, #7C6FFF, #00D4AA)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s ease',
-              boxShadow: logoHovered ? '0 0 16px rgba(124,111,255,0.5)' : 'none',
-              flexShrink: 0,
-            }}>
-              <span style={{
-                fontFamily: "'Courier New', monospace",
-                fontSize: 13,
-                fontWeight: 700,
-                color: '#fff',
-                letterSpacing: '-0.05em',
-              }}>CP</span>
-            </div>
+            
 
             <span style={{
               fontSize: 15,
