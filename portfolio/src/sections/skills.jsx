@@ -14,58 +14,54 @@ import { BiLogoVisualStudio } from 'react-icons/bi';
 
 const skills = {
   Languages: {
-    accent: '#7C6FFF',
-    glow: 'rgba(124,111,255,0.15)',
-    border: 'rgba(124,111,255,0.3)',
+    accent: '#E8613C',
+    border: 'rgba(232,97,60,0.3)',
     label: '01',
     items: [
-      { name: 'C++', icon: <SiCplusplus /> },
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'HTML', icon: <SiHtml5 /> },
-      { name: 'CSS', icon: <FaCss3Alt /> },
+      { name: 'C++',        icon: <SiCplusplus /> },
+      { name: 'Python',     icon: <SiPython /> },
+      { name: 'HTML',       icon: <SiHtml5 /> },
+      { name: 'CSS',        icon: <FaCss3Alt /> },
       { name: 'JavaScript', icon: <SiJavascript /> },
       { name: 'TypeScript', icon: <SiTypescript /> },
-      { name: 'C#', icon: <SiDotnet /> },
-      { name: 'Java', icon: <FaJava /> },
-      { name: 'Go', icon: <SiGo /> },
-      { name: 'SQL', icon: <SiMysql /> },
+      { name: 'C#',         icon: <SiDotnet /> },
+      { name: 'Java',       icon: <FaJava /> },
+      { name: 'Go',         icon: <SiGo /> },
+      { name: 'SQL',        icon: <SiMysql /> },
     ],
   },
   'Frameworks & Libraries': {
-    accent: '#00D4AA',
-    glow: 'rgba(0,212,170,0.12)',
-    border: 'rgba(0,212,170,0.3)',
+    accent: '#F0A878',
+    border: 'rgba(240,168,120,0.3)',
     label: '02',
     items: [
-      { name: 'React', icon: <SiReact /> },
-      { name: 'Node.js', icon: <SiNodedotjs /> },
-      { name: 'ASP.NET', icon: <SiDotnet /> },
-      { name: 'Spring Boot', icon: <SiSpringboot /> },
-      { name: 'Express', icon: <SiExpress /> },
-      { name: 'NumPy', icon: <SiNumpy /> },
-      { name: 'Pandas', icon: <SiPandas /> },
+      { name: 'React',        icon: <SiReact /> },
+      { name: 'Node.js',      icon: <SiNodedotjs /> },
+      { name: 'ASP.NET',      icon: <SiDotnet /> },
+      { name: 'Spring Boot',  icon: <SiSpringboot /> },
+      { name: 'Express',      icon: <SiExpress /> },
+      { name: 'NumPy',        icon: <SiNumpy /> },
+      { name: 'Pandas',       icon: <SiPandas /> },
       { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
     ],
   },
   Tools: {
-    accent: '#FF6B6B',
-    glow: 'rgba(255,107,107,0.12)',
-    border: 'rgba(255,107,107,0.3)',
+    accent: '#C4A882',
+    border: 'rgba(196,168,130,0.3)',
     label: '03',
     items: [
       { name: 'VS Code', icon: <BiLogoVisualStudio /> },
-      { name: 'GitHub', icon: <SiGithub /> },
-      { name: 'Docker', icon: <DiDocker /> },
+      { name: 'GitHub',  icon: <SiGithub /> },
+      { name: 'Docker',  icon: <DiDocker /> },
       { name: 'Jenkins', icon: <FaJenkins /> },
-      { name: 'AWS', icon: <FaAws /> },
-      { name: 'Azure', icon: <VscAzure /> },
+      { name: 'AWS',     icon: <FaAws /> },
+      { name: 'Azure',   icon: <VscAzure /> },
       { name: 'Postman', icon: <SiPostman /> },
-      { name: 'Claude', icon: <SiClaude /> },
+      { name: 'Claude',  icon: <SiClaude /> },
     ],
   },
 };
 
-/* ── Animated counter for skill count ── */
 function Counter({ to, accent }) {
   const [val, setVal] = useState(0);
   const ref = useRef(null);
@@ -88,7 +84,6 @@ function Counter({ to, accent }) {
   );
 }
 
-/* ── Single skill pill ── */
 function SkillPill({ name, icon, accent, delay }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -100,29 +95,20 @@ function SkillPill({ name, icon, accent, delay }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-        padding: '8px 14px',
-        borderRadius: 8,
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '8px 14px', borderRadius: 8,
         border: hovered ? `1px solid ${accent}` : '1px solid rgba(255,255,255,0.08)',
         background: hovered ? `${accent}18` : 'rgba(255,255,255,0.03)',
         color: hovered ? '#fff' : 'rgba(255,255,255,0.65)',
-        fontSize: 13,
-        fontWeight: 500,
-        cursor: 'default',
-        transition: 'all 0.2s ease',
-        letterSpacing: '0.01em',
-        userSelect: 'none',
-        whiteSpace: 'nowrap',
+        fontSize: 13, fontWeight: 500, cursor: 'default',
+        transition: 'all 0.2s ease', letterSpacing: '0.01em',
+        userSelect: 'none', whiteSpace: 'nowrap',
       }}
     >
       <span style={{
         fontSize: 15,
         color: hovered ? accent : 'rgba(255,255,255,0.45)',
-        transition: 'color 0.2s',
-        display: 'flex',
-        alignItems: 'center',
+        transition: 'color 0.2s', display: 'flex', alignItems: 'center',
       }}>
         {icon}
       </span>
@@ -131,10 +117,8 @@ function SkillPill({ name, icon, accent, delay }) {
   );
 }
 
-/* ── Category card ── */
 function CategoryCard({ category, data, cardIndex }) {
-  const { accent, glow, border, label, items } = data;
-
+  const { accent, border, label, items } = data;
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -142,74 +126,34 @@ function CategoryCard({ category, data, cardIndex }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: cardIndex * 0.15, ease: [0.16, 1, 0.3, 1] }}
       style={{
-        position: 'relative',
-        borderRadius: 20,
-        border: `1px solid ${border}`,
-        background: `linear-gradient(135deg, rgba(15,15,20,0.95) 0%, rgba(20,18,30,0.9) 100%)`,
-        padding: '36px 32px 32px',
-        overflow: 'hidden',
-        backdropFilter: 'blur(12px)',
+        position: 'relative', borderRadius: 20, border: `1px solid ${border}`,
+        background: 'rgba(255,255,255,0.025)',
+        padding: '36px 32px 32px', overflow: 'hidden',
       }}
     >
-      {/* Ambient glow top-right */}
-      <div style={{
-        position: 'absolute',
-        top: -60,
-        right: -60,
-        width: 200,
-        height: 200,
-        borderRadius: '50%',
-        background: glow,
-        filter: 'blur(40px)',
-        pointerEvents: 'none',
-      }} />
-
       {/* Corner accent line */}
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: 60,
-        height: 3,
-        background: `linear-gradient(90deg, ${accent}, transparent)`,
-        borderRadius: '0 0 3px 0',
+        position: 'absolute', top: 0, left: 0, width: 60, height: 3,
+        background: accent, borderRadius: '0 0 3px 0',
       }} />
 
-      {/* Header row */}
+      {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
         <div>
-          {/* Index label */}
           <div style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: 11,
-            letterSpacing: '0.15em',
-            color: accent,
-            marginBottom: 6,
-            opacity: 0.8,
+            fontFamily: "'Courier New', monospace", fontSize: 11,
+            letterSpacing: '0.15em', color: accent, marginBottom: 6, opacity: 0.8,
           }}>
             {label} ──
           </div>
-          <h2 style={{
-            margin: 0,
-            fontSize: 22,
-            fontWeight: 700,
-            color: '#fff',
-            letterSpacing: '-0.02em',
-            lineHeight: 1.1,
-          }}>
+          <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             {category}
           </h2>
         </div>
-
-        {/* Count badge */}
         <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          background: 'rgba(255,255,255,0.04)',
-          border: `1px solid rgba(255,255,255,0.08)`,
-          borderRadius: 10,
-          padding: '8px 14px',
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: 10, padding: '8px 14px',
         }}>
           <Counter to={items.length} accent={accent} />
           <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', marginTop: 2 }}>SKILLS</span>
@@ -217,141 +161,65 @@ function CategoryCard({ category, data, cardIndex }) {
       </div>
 
       {/* Divider */}
-      <div style={{
-        height: 1,
-        background: `linear-gradient(90deg, ${accent}40, transparent)`,
-        marginBottom: 24,
-      }} />
+      <div style={{ height: 1, background: `${accent}40`, marginBottom: 24 }} />
 
-      {/* Pills grid */}
+      {/* Pills */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
         {items.map(({ name, icon }, i) => (
-          <SkillPill
-            key={name}
-            name={name}
-            icon={icon}
-            accent={accent}
-            delay={cardIndex * 0.1 + i * 0.04}
-          />
+          <SkillPill key={name} name={name} icon={icon} accent={accent} delay={cardIndex * 0.1 + i * 0.04} />
         ))}
       </div>
     </motion.div>
   );
 }
 
-/* ── Floating particle dot ── */
 function Dot({ x, y, size, opacity }) {
   return (
     <div style={{
-      position: 'absolute',
-      left: `${x}%`,
-      top: `${y}%`,
-      width: size,
-      height: size,
-      borderRadius: '50%',
-      background: 'rgba(255,255,255,0.6)',
-      opacity,
-      pointerEvents: 'none',
+      position: 'absolute', left: `${x}%`, top: `${y}%`,
+      width: size, height: size, borderRadius: '50%',
+      background: 'rgba(255,255,255,0.6)', opacity, pointerEvents: 'none',
     }} />
   );
 }
 
 const dots = [
-  { x: 8, y: 15, size: 2, opacity: 0.3 },
-  { x: 92, y: 10, size: 1.5, opacity: 0.2 },
-  { x: 3, y: 70, size: 1, opacity: 0.25 },
-  { x: 96, y: 60, size: 2, opacity: 0.15 },
-  { x: 50, y: 4, size: 1.5, opacity: 0.2 },
-  { x: 20, y: 90, size: 1, opacity: 0.15 },
-  { x: 80, y: 88, size: 2, opacity: 0.2 },
+  { x: 8,  y: 15, size: 2,   opacity: 0.3  },
+  { x: 92, y: 10, size: 1.5, opacity: 0.2  },
+  { x: 3,  y: 70, size: 1,   opacity: 0.25 },
+  { x: 96, y: 60, size: 2,   opacity: 0.15 },
+  { x: 50, y: 4,  size: 1.5, opacity: 0.2  },
+  { x: 20, y: 90, size: 1,   opacity: 0.15 },
+  { x: 80, y: 88, size: 2,   opacity: 0.2  },
 ];
 
-/* ── Main Skills section ── */
 const Skills = () => {
   return (
     <section
       id="skills"
       style={{
-        position: 'relative',
-        width: '100%',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '100px 24px',
-        background: '#080810',
-        overflow: 'hidden',
-        boxSizing: 'border-box',
+        position: 'relative', width: '100%', minHeight: '100vh',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        padding: '100px 24px', background: '#0D0D0D',
+        overflow: 'hidden', boxSizing: 'border-box',
       }}
     >
-      {/* Background grid */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
-        `,
-        backgroundSize: '60px 60px',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Radial vignette */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, #080810 100%)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Large purple ambient blob */}
-      <div style={{
-        position: 'absolute',
-        top: '10%',
-        left: '-10%',
-        width: 500,
-        height: 500,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(124,111,255,0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      {/* Teal ambient blob */}
-      <div style={{
-        position: 'absolute',
-        bottom: '5%',
-        right: '-5%',
-        width: 400,
-        height: 400,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-
-      {/* Floating dots */}
+      {/* Dots */}
       {dots.map((d, i) => <Dot key={i} {...d} />)}
 
-      {/* ── Section header ── */}
+      {/* Section header */}
       <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', marginBottom: 72 }}>
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 10,
-            marginBottom: 18,
-          }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 18 }}
         >
           <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
           <span style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: 11,
-            letterSpacing: '0.2em',
-            color: 'rgba(255,255,255,0.4)',
-            textTransform: 'uppercase',
+            fontFamily: "'Courier New', monospace", fontSize: 11,
+            letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase',
           }}>
             Technical Expertise
           </span>
@@ -364,15 +232,10 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{
-            margin: 0,
-            fontSize: 'clamp(40px, 6vw, 72px)',
-            fontWeight: 800,
-            letterSpacing: '-0.04em',
-            lineHeight: 1,
+            margin: 0, fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800,
+            letterSpacing: '-0.04em', lineHeight: 1,
             background: 'linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.45) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
           }}
         >
           My Skills
@@ -384,34 +247,22 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
           style={{
-            margin: '18px auto 0',
-            width: 48,
-            height: 3,
-            background: 'linear-gradient(90deg, #7C6FFF, #00D4AA)',
-            borderRadius: 3,
-            transformOrigin: 'left',
+            margin: '18px auto 0', width: 48, height: 3,
+            background: '#E8613C', borderRadius: 3, transformOrigin: 'left',
           }}
         />
       </div>
 
-      {/* ── Cards grid ── */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 10,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 24,
-          width: '100%',
-          maxWidth: 1100,
-        }}
-      >
+      {/* Cards grid */}
+      <div style={{
+        position: 'relative', zIndex: 10,
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: 24, width: '100%', maxWidth: 1100,
+      }}>
         {Object.entries(skills).map(([category, data], i) => (
           <CategoryCard key={category} category={category} data={data} cardIndex={i} />
         ))}
       </div>
-
-      
     </section>
   );
 };

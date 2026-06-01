@@ -43,10 +43,8 @@ const ProjectModal = ({ project, onClose }) => {
     setIndex(([prev]) => [mod(prev + dir, total), dir]);
   };
 
-  // Preload neighbors
   useEffect(() => {
     if (!total) return;
-    let cancelled = false;
     [mod(index - 1, total), index, mod(index + 1, total)].forEach((i) => {
       const src = project.images[i];
       if (!src) return;
@@ -54,17 +52,14 @@ const ProjectModal = ({ project, onClose }) => {
       img.src = src;
       if (img.decode) img.decode().catch(() => {});
     });
-    return () => { cancelled = true; };
   }, [index, total, project]);
 
-  // Lock scroll
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = prev || 'auto'; };
   }, []);
 
-  // Keyboard nav
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'ArrowRight') paginate(1);
@@ -83,21 +78,16 @@ const ProjectModal = ({ project, onClose }) => {
 
   if (!project) return null;
 
-  const accent = project.accent || '#7C6FFF';
+  const accent = project.accent || '#E8613C';
 
   return (
     <div
       onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}
       style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        position: 'fixed', inset: 0, zIndex: 50,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '24px 16px',
-        background: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(14px)',
+        background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(14px)',
       }}
     >
       <MotionConfig transition={{ type: 'spring', stiffness: 260, damping: 26, mass: 0.8 }}>
@@ -106,24 +96,16 @@ const ProjectModal = ({ project, onClose }) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 20 }}
           style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: 860,
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            borderRadius: 20,
+            position: 'relative', width: '100%', maxWidth: 860,
+            maxHeight: '90vh', overflowY: 'auto', borderRadius: 20,
             border: '1px solid rgba(255,255,255,0.09)',
-            background: 'rgba(10,10,20,0.98)',
-            backdropFilter: 'blur(20px)',
-            padding: '36px 36px 32px',
-            boxSizing: 'border-box',
+            background: 'rgba(13,13,13,0.98)', backdropFilter: 'blur(20px)',
+            padding: '36px 36px 32px', boxSizing: 'border-box',
           }}
         >
           {/* Top accent line */}
           <div style={{
-            position: 'absolute',
-            top: 0, left: 0, right: 0,
-            height: 2,
+            position: 'absolute', top: 0, left: 0, right: 0, height: 2,
             borderRadius: '20px 20px 0 0',
             background: `linear-gradient(90deg, ${accent}, transparent)`,
           }} />
@@ -133,54 +115,33 @@ const ProjectModal = ({ project, onClose }) => {
             onClick={onClose}
             aria-label="Close modal"
             style={{
-              position: 'absolute',
-              top: 16, right: 16,
-              width: 32, height: 32,
-              borderRadius: 8,
+              position: 'absolute', top: 16, right: 16,
+              width: 32, height: 32, borderRadius: 8,
               border: '1px solid rgba(255,255,255,0.08)',
               background: 'rgba(255,255,255,0.04)',
-              color: 'rgba(255,255,255,0.45)',
-              fontSize: 16,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.2s',
-              lineHeight: 1,
+              color: 'rgba(255,255,255,0.45)', fontSize: 16, cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s', lineHeight: 1,
             }}
             onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; }}
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.45)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; }}
           >✕</button>
 
-          {/* Project title + index */}
+          {/* Title */}
           <div style={{ marginBottom: 24 }}>
             <div style={{
-              fontFamily: "'Courier New', monospace",
-              fontSize: 10,
-              letterSpacing: '0.15em',
-              color: accent,
-              marginBottom: 6,
-              opacity: 0.9,
+              fontFamily: "'Courier New', monospace", fontSize: 10,
+              letterSpacing: '0.15em', color: accent, marginBottom: 6, opacity: 0.9,
             }}>
               {project.index || '──'} Project
             </div>
-            <h2 style={{
-              margin: 0,
-              fontSize: 22,
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              color: '#fff',
-            }}>
+            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700, letterSpacing: '-0.02em', color: '#fff' }}>
               {project.title}
             </h2>
           </div>
 
           {/* Divider */}
-          <div style={{
-            height: 1,
-            background: `linear-gradient(90deg, ${accent}40, transparent)`,
-            marginBottom: 24,
-          }} />
+          <div style={{ height: 1, background: `linear-gradient(90deg, ${accent}40, transparent)`, marginBottom: 24 }} />
 
           {/* Tech pills */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 28 }}>
@@ -192,15 +153,10 @@ const ProjectModal = ({ project, onClose }) => {
                   key={tech}
                   whileHover={{ y: -2 }}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 7,
-                    padding: '7px 13px',
-                    borderRadius: 8,
-                    border: `1px solid ${color}30`,
-                    background: `${color}10`,
-                    cursor: 'default',
-                    userSelect: 'none',
+                    display: 'flex', alignItems: 'center', gap: 7,
+                    padding: '7px 13px', borderRadius: 8,
+                    border: `1px solid ${color}30`, background: `${color}10`,
+                    cursor: 'default', userSelect: 'none',
                   }}
                 >
                   <Icon style={{ color, fontSize: 14, flexShrink: 0 }} />
@@ -214,12 +170,8 @@ const ProjectModal = ({ project, onClose }) => {
 
           {/* Carousel */}
           <div style={{
-            position: 'relative',
-            width: '100%',
-            borderRadius: 14,
-            overflow: 'hidden',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.07)',
+            position: 'relative', width: '100%', borderRadius: 14, overflow: 'hidden',
+            background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)',
             aspectRatio: '16/9',
           }}>
             <AnimatePresence initial={false} mode="popLayout" custom={direction}>
@@ -243,53 +195,38 @@ const ProjectModal = ({ project, onClose }) => {
                   else if (info.offset.x < -120 || power < -8000) paginate(1);
                 }}
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: 14,
-                  userSelect: 'none',
-                  display: 'block',
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  borderRadius: 14, userSelect: 'none', display: 'block',
                 }}
               />
             </AnimatePresence>
 
             {/* Counter */}
             <div style={{
-              position: 'absolute',
-              bottom: 12, left: 12,
-              padding: '4px 12px',
-              borderRadius: 20,
-              background: 'rgba(0,0,0,0.6)',
-              backdropFilter: 'blur(8px)',
+              position: 'absolute', bottom: 12, left: 12,
+              padding: '4px 12px', borderRadius: 20,
+              background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)',
               border: '1px solid rgba(255,255,255,0.1)',
-              color: 'rgba(255,255,255,0.8)',
-              fontSize: 11,
-              fontFamily: "'Courier New', monospace",
-              letterSpacing: '0.06em',
+              color: 'rgba(255,255,255,0.8)', fontSize: 11,
+              fontFamily: "'Courier New', monospace", letterSpacing: '0.06em',
             }}>
               {index + 1} / {total}
             </div>
 
-            {/* Arrows — only if multiple images */}
+            {/* Arrows */}
             {total > 1 && (
               <>
                 <button
                   onClick={() => paginate(-1)}
                   aria-label="Previous image"
                   style={{
-                    position: 'absolute',
-                    left: 12, top: '50%', transform: 'translateY(-50%)',
+                    position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)',
                     width: 36, height: 36, borderRadius: 10,
-                    background: 'rgba(0,0,0,0.55)',
-                    backdropFilter: 'blur(8px)',
+                    background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(8px)',
                     border: '1px solid rgba(255,255,255,0.12)',
-                    color: '#fff',
-                    fontSize: 20,
-                    cursor: 'pointer',
+                    color: '#fff', fontSize: 20, cursor: 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    transition: 'all 0.2s',
-                    zIndex: 10,
-                    lineHeight: 1,
+                    transition: 'all 0.2s', zIndex: 10, lineHeight: 1,
                   }}
                   onMouseEnter={e => { e.currentTarget.style.background = `${accent}33`; e.currentTarget.style.borderColor = `${accent}55`; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.55)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; }}
@@ -299,19 +236,13 @@ const ProjectModal = ({ project, onClose }) => {
                   onClick={() => paginate(1)}
                   aria-label="Next image"
                   style={{
-                    position: 'absolute',
-                    right: 12, top: '50%', transform: 'translateY(-50%)',
+                    position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)',
                     width: 36, height: 36, borderRadius: 10,
-                    background: 'rgba(0,0,0,0.55)',
-                    backdropFilter: 'blur(8px)',
+                    background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(8px)',
                     border: '1px solid rgba(255,255,255,0.12)',
-                    color: '#fff',
-                    fontSize: 20,
-                    cursor: 'pointer',
+                    color: '#fff', fontSize: 20, cursor: 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    transition: 'all 0.2s',
-                    zIndex: 10,
-                    lineHeight: 1,
+                    transition: 'all 0.2s', zIndex: 10, lineHeight: 1,
                   }}
                   onMouseEnter={e => { e.currentTarget.style.background = `${accent}33`; e.currentTarget.style.borderColor = `${accent}55`; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.55)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; }}
@@ -322,27 +253,16 @@ const ProjectModal = ({ project, onClose }) => {
 
           {/* Dot indicators */}
           {total > 1 && (
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 6,
-              marginTop: 16,
-            }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 16 }}>
               {Array.from({ length: total }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setIndex([i, i > index ? 1 : -1])}
                   style={{
-                    width: i === index ? 20 : 6,
-                    height: 6,
-                    borderRadius: 3,
+                    width: i === index ? 20 : 6, height: 6, borderRadius: 3,
                     border: 'none',
-                    background: i === index
-                      ? accent
-                      : 'rgba(255,255,255,0.15)',
-                    cursor: 'pointer',
-                    transition: 'all 0.25s ease',
-                    padding: 0,
+                    background: i === index ? accent : 'rgba(255,255,255,0.15)',
+                    cursor: 'pointer', transition: 'all 0.25s ease', padding: 0,
                   }}
                 />
               ))}

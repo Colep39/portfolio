@@ -28,14 +28,13 @@ function NavLink({ href, label, onClick }) {
       }}
     >
       {label}
-      {/* Underline */}
       <span style={{
         position: 'absolute',
         bottom: -2,
         left: 0,
         width: hovered ? '100%' : '0%',
         height: 1,
-        background: 'linear-gradient(90deg, #7C6FFF, #00D4AA)',
+        background: '#E8613C',
         borderRadius: 1,
         transition: 'width 0.25s ease',
         display: 'block',
@@ -69,7 +68,7 @@ const NavBar = ({ toggleModal }) => {
         width: '100%',
         zIndex: 100,
         transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
-        background: scrolled ? 'rgba(8,8,16,0.85)' : 'transparent',
+        background: scrolled ? 'rgba(13,13,13,0.85)' : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
         boxSizing: 'border-box',
@@ -84,21 +83,14 @@ const NavBar = ({ toggleModal }) => {
           justifyContent: 'space-between',
         }}>
 
-          {/* ── Logo ── */}
+          {/* Logo */}
           <a
             href="#hero"
             onClick={handleLinkClick}
             onMouseEnter={() => setLogoHovered(true)}
             onMouseLeave={() => setLogoHovered(false)}
-            style={{
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-            }}
+            style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}
           >
-            
-
             <span style={{
               fontSize: 15,
               fontWeight: 700,
@@ -110,17 +102,13 @@ const NavBar = ({ toggleModal }) => {
             </span>
           </a>
 
-          {/* ── Desktop links ── */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 32,
-          }} className="desktop-nav">
+          {/* Desktop links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desktop-nav">
             {navLinks.map(l => (
               <NavLink key={l.label} {...l} onClick={handleLinkClick} />
             ))}
 
-            {/* Contact button */}
+            {/* Contact */}
             <button
               onClick={toggleModal}
               onMouseEnter={() => setContactHovered(true)}
@@ -131,8 +119,8 @@ const NavBar = ({ toggleModal }) => {
                 letterSpacing: '0.01em',
                 padding: '8px 18px',
                 borderRadius: 8,
-                border: contactHovered ? '1px solid rgba(124,111,255,0.5)' : '1px solid rgba(255,255,255,0.1)',
-                background: contactHovered ? 'rgba(124,111,255,0.12)' : 'rgba(255,255,255,0.04)',
+                border: contactHovered ? '1px solid rgba(232,97,60,0.5)' : '1px solid rgba(255,255,255,0.1)',
+                background: contactHovered ? 'rgba(232,97,60,0.1)' : 'rgba(255,255,255,0.04)',
                 color: contactHovered ? '#fff' : 'rgba(255,255,255,0.55)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
@@ -141,7 +129,7 @@ const NavBar = ({ toggleModal }) => {
               Contact
             </button>
 
-            {/* Resume — gradient pill */}
+            {/* Resume */}
             <a
               href="/cole_plagens_resume.pdf"
               target="_blank"
@@ -155,12 +143,10 @@ const NavBar = ({ toggleModal }) => {
                 padding: '8px 18px',
                 borderRadius: 8,
                 textDecoration: 'none',
-                background: resumeHovered
-                  ? 'linear-gradient(135deg, #8B7FFF, #00E4B8)'
-                  : 'linear-gradient(135deg, #7C6FFF, #00D4AA)',
+                background: resumeHovered ? '#d45530' : '#E8613C',
                 color: '#fff',
                 border: '1px solid transparent',
-                boxShadow: resumeHovered ? '0 0 20px rgba(124,111,255,0.4)' : 'none',
+                boxShadow: resumeHovered ? '0 0 20px rgba(232,97,60,0.35)' : 'none',
                 transition: 'all 0.2s ease',
                 transform: resumeHovered ? 'translateY(-1px)' : 'none',
               }}
@@ -169,7 +155,7 @@ const NavBar = ({ toggleModal }) => {
             </a>
           </div>
 
-          {/* ── Mobile hamburger ── */}
+          {/* Mobile hamburger */}
           <button
             onClick={handleToggle}
             className="mobile-menu-btn"
@@ -189,7 +175,7 @@ const NavBar = ({ toggleModal }) => {
         </div>
       </nav>
 
-      {/* ── Mobile dropdown ── */}
+      {/* Mobile dropdown */}
       {menuOpen && (
         <div style={{
           position: 'fixed',
@@ -197,7 +183,7 @@ const NavBar = ({ toggleModal }) => {
           left: 0,
           right: 0,
           zIndex: 99,
-          background: 'rgba(8,8,16,0.97)',
+          background: 'rgba(13,13,13,0.97)',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(255,255,255,0.07)',
           padding: '24px 32px 32px',
@@ -255,7 +241,7 @@ const NavBar = ({ toggleModal }) => {
               fontSize: 14,
               fontWeight: 600,
               textDecoration: 'none',
-              background: 'linear-gradient(135deg, #7C6FFF, #00D4AA)',
+              background: '#E8613C',
               color: '#fff',
             }}
           >

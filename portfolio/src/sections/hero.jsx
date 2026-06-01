@@ -36,7 +36,7 @@ function Cursor() {
       marginLeft: 6,
       borderRadius: 2,
       verticalAlign: "middle",
-      background: on ? "#7C6FFF" : "transparent",
+      background: on ? "#E8613C" : "transparent",
       transition: "background 0.1s",
     }} />
   );
@@ -62,12 +62,10 @@ function CTAButton({ href, primary, children }) {
         cursor: "pointer",
         transform: hovered ? "translateY(-2px)" : "none",
         ...(primary ? {
-          background: hovered
-            ? "linear-gradient(135deg, #8B7FFF, #00E4B8)"
-            : "linear-gradient(135deg, #7C6FFF, #00D4AA)",
+          background: hovered ? "#d45530" : "#E8613C",
           color: "#fff",
           border: "1px solid transparent",
-          boxShadow: hovered ? "0 0 28px rgba(124,111,255,0.45)" : "none",
+          boxShadow: hovered ? "0 8px 24px rgba(232,97,60,0.3)" : "none",
         } : {
           background: hovered ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.03)",
           color: hovered ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)",
@@ -77,45 +75,6 @@ function CTAButton({ href, primary, children }) {
     >
       {children}
     </a>
-  );
-}
-
-function ScrollHint() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 2, duration: 0.8 }}
-      style={{
-        position: "absolute",
-        bottom: 40,
-        left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 8,
-        zIndex: 10,
-        pointerEvents: "none",
-      }}
-    >
-      <span style={{
-        fontFamily: "'Courier New', monospace",
-        fontSize: 10,
-        letterSpacing: "0.2em",
-        color: "rgba(255,255,255,0.25)",
-        textTransform: "uppercase",
-      }}>Scroll</span>
-      <motion.div
-        animate={{ y: [0, 6, 0] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        style={{
-          width: 1,
-          height: 32,
-          background: "linear-gradient(180deg, rgba(124,111,255,0.6), transparent)",
-        }}
-      />
-    </motion.div>
   );
 }
 
@@ -134,7 +93,7 @@ const Hero = () => {
         position: "relative",
         width: "100%",
         minHeight: "100vh",
-        background: "#080810",
+        background: "#0D0D0D",
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
@@ -142,29 +101,10 @@ const Hero = () => {
         boxSizing: "border-box",
       }}
     >
-      {/* Grid */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)`,
-        backgroundSize: "60px 60px",
-      }} />
-
       {/* Vignette */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, #080810 100%)",
-      }} />
-
-      {/* Blobs */}
-      <div style={{
-        position: "absolute", top: "-10%", left: "-8%", width: 600, height: 600,
-        borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(124,111,255,0.09) 0%, transparent 65%)",
-      }} />
-      <div style={{
-        position: "absolute", bottom: "-5%", right: "-5%", width: 480, height: 480,
-        borderRadius: "50%", pointerEvents: "none",
-        background: "radial-gradient(circle, rgba(0,212,170,0.08) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, #0D0D0D 100%)",
       }} />
 
       {/* Dots */}
@@ -172,7 +112,7 @@ const Hero = () => {
         <div key={i} style={{
           position: "absolute", left: `${d.x}%`, top: `${d.y}%`,
           width: d.size, height: d.size, borderRadius: "50%",
-          background: "rgba(255,255,255,0.7)", opacity: d.opacity, pointerEvents: "none",
+          background: "rgba(255,255,255,0.6)", opacity: d.opacity, pointerEvents: "none",
         }} />
       ))}
 
@@ -202,7 +142,7 @@ const Hero = () => {
           Hey, I'm
         </motion.span>
 
-        {/* Name — rendered as a single block, no per-letter spans */}
+        {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -224,7 +164,7 @@ const Hero = () => {
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
           }}>Cole </span><span style={{
-            background: "linear-gradient(135deg, #7C6FFF 0%, #00D4AA 100%)",
+            background: "linear-gradient(135deg, #E8613C 0%, #F0A878 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -245,7 +185,7 @@ const Hero = () => {
             >
               <div style={{
                 width: 24, height: 2, flexShrink: 0, borderRadius: 2,
-                background: "linear-gradient(90deg, #7C6FFF, #00D4AA)",
+                background: "#E8613C",
               }} />
               <span style={{
                 fontSize: "clamp(18px, 2.5vw, 28px)",
@@ -295,10 +235,7 @@ const Hero = () => {
           <CTAButton href="#about">About Me</CTAButton>
         </motion.div>
 
-       
       </div>
-
-      <ScrollHint />
     </section>
   );
 };
