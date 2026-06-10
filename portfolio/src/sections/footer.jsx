@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 const socials = [
   { icon: FaGithub,   href: 'https://github.com/colep39',               label: 'GitHub'   },
   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/cole-plagens/', label: 'LinkedIn' },
-  { icon: FaEnvelope, href: 'mailto:colep3@icloud.com',                 label: 'Email'    },
+  { icon: FaEnvelope, href: 'mailto:cbplagen@outlook.com',                 label: 'Email'    },
 ];
 
 function SocialLink({ icon: Icon, href, label }) {
@@ -62,14 +62,6 @@ const Footer = () => {
             © {new Date().getFullYear()} Cole Plagens
           </span>
         </div>
-
-        {/* Center */}
-        <span style={{
-          fontFamily: "'Courier New', monospace", fontSize: 10,
-          letterSpacing: '0.15em', color: 'rgba(255,255,255,0.18)', textTransform: 'uppercase',
-        }}>
-          Built with React
-        </span>
 
         {/* Right — socials */}
         <div style={{ display: 'flex', gap: 10 }}>

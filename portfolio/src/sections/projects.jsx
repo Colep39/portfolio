@@ -55,7 +55,7 @@ const projects = [
     title: 'Incident Monitoring Platform',
     description:
       'A full-stack incident monitoring and root cause analysis platform built to demonstrate production-grade engineering practices. It ingests logs from distributed services, detects anomalies using statistical analysis, groups related errors into incidents, and surfaces everything through a real-time dashboard.',
-    github: 'https://github.com/colep39/',
+    github: 'https://github.com/Colep39/logwatch',
     techStack: ['React', 'TypeScript', 'C#', 'PostgreSQL', 'Docker'],
     images: ['/incidentmonitor.png'],
     live: null,
