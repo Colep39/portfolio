@@ -174,9 +174,8 @@ const AboutMe = () => {
             color: "rgba(255,255,255,0.6)", fontWeight: 400,
           }}>
             I'm a{" "}
-            <span style={{ color: "#fff", fontWeight: 600 }}>full stack developer</span> and{" "}
-            <span style={{ color: "#fff", fontWeight: 600 }}>data scientist</span> who loves
-            crafting intuitive, high-performing web applications. I thrive in collaborative
+            <span style={{ color: "#fff", fontWeight: 600 }}>full-stack developer</span>  who loves
+            crafting intuitive, high-performing web applications with scalability and security in mind. I thrive in collaborative
             environments where creativity and logic come together to solve real-world problems.
             Outside of tech I enjoy sports and TV/movies.
           </p>
