@@ -6,10 +6,11 @@ const roles = [
   "Full Stack Developer",
   "Data Scientist",
   "Software Engineer",
-  "Data Analyst",
   "Problem Solver",
   "Collaborator",
   "System Minded",
+  "Cloud Practitioner",
+  
 ];
 
 const dots = [
