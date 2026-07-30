@@ -133,7 +133,7 @@ const AboutMe = () => {
                 display: "inline-block", animation: "pulse 2s ease-in-out infinite",
               }} />
               <span style={{ fontSize: 11, color: "#E8613C", fontWeight: 600, letterSpacing: "0.05em" }}>
-                Open to Work
+                Employed
               </span>
             </div>
           </div>

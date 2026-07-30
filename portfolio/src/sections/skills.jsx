@@ -5,7 +5,7 @@ import {
   SiCplusplus, SiPython, SiHtml5, SiJavascript, SiMysql, SiReact,
   SiNodedotjs, SiTailwindcss, SiExpress, SiGithub,
   SiTypescript, SiDotnet, SiGo, SiSpringboot, SiNumpy, SiPandas,
-  SiClaude, SiPostman,
+  SiClaude, SiPostman, SiPhp,
 } from 'react-icons/si';
 import { FaAws, FaJenkins, FaCss3Alt, FaJava } from 'react-icons/fa';
 import { VscAzure } from 'react-icons/vsc';
@@ -22,9 +22,9 @@ const categories = [
       { name: 'CSS',        icon: FaCss3Alt },
       { name: 'JavaScript', icon: SiJavascript },
       { name: 'TypeScript', icon: SiTypescript },
+      { name: 'PHP',        icon: SiPhp },
       { name: 'C#',         icon: SiDotnet },
       { name: 'Java',       icon: FaJava },
-      { name: 'Go',         icon: SiGo },
       { name: 'SQL',        icon: SiMysql },
     ],
   },
