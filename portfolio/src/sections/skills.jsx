@@ -12,6 +12,10 @@ import { VscAzure } from 'react-icons/vsc';
 import { DiDocker } from 'react-icons/di';
 import { BiLogoVisualStudio } from 'react-icons/bi';
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = '#22C55E';       // green-500
+const ACCENT_RGB = '34, 197, 94';
+
 const categories = [
   {
     title: 'Languages',
@@ -72,9 +76,9 @@ function SkillChip({ name, icon: Icon, delay }) {
         padding: '9px 16px',
         borderRadius: 6,
         border: hovered
-          ? '1px solid rgba(232,97,60,0.45)'
+          ? `1px solid rgba(${ACCENT_RGB},0.45)`
           : '1px solid rgba(255,255,255,0.08)',
-        background: hovered ? 'rgba(232,97,60,0.08)' : 'transparent',
+        background: hovered ? `rgba(${ACCENT_RGB},0.08)` : 'transparent',
         cursor: 'default',
         transition: 'all 0.18s ease',
         userSelect: 'none',
@@ -82,7 +86,7 @@ function SkillChip({ name, icon: Icon, delay }) {
     >
       <Icon style={{
         fontSize: 15,
-        color: hovered ? '#E8613C' : 'rgba(255,255,255,0.35)',
+        color: hovered ? ACCENT : 'rgba(255,255,255,0.35)',
         transition: 'color 0.18s ease',
         flexShrink: 0,
       }} />
@@ -121,7 +125,7 @@ function CategoryBlock({ category, blockIndex }) {
           fontFamily: "'Courier New', monospace",
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
-          color: '#E8613C',
+          color: ACCENT,
         }}>
           {category.title}
         </span>
@@ -206,7 +210,7 @@ const Skills = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             style={{
               marginTop: 18, width: 48, height: 3,
-              background: '#E8613C', borderRadius: 3, transformOrigin: 'left',
+              background: ACCENT, borderRadius: 3, transformOrigin: 'left',
             }}
           />
         </div>

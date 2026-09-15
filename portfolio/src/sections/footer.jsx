@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 /* eslint-disable */
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = '#22C55E';       // green-500
+const ACCENT_LIGHT = '#86EFAC'; // green-300
+const ACCENT_RGB = '34, 197, 94';
+
 const socials = [
   { icon: FaGithub,   href: 'https://github.com/colep39',               label: 'GitHub'   },
   { icon: FaLinkedin, href: 'https://www.linkedin.com/in/cole-plagens/', label: 'LinkedIn' },
@@ -21,9 +26,9 @@ function SocialLink({ icon: Icon, href, label }) {
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         width: 38, height: 38, borderRadius: 10,
-        border: hovered ? '1px solid rgba(232,97,60,0.5)' : '1px solid rgba(255,255,255,0.08)',
-        background: hovered ? 'rgba(232,97,60,0.1)' : 'rgba(255,255,255,0.03)',
-        color: hovered ? '#E8613C' : 'rgba(255,255,255,0.4)',
+        border: hovered ? `1px solid rgba(${ACCENT_RGB},0.5)` : '1px solid rgba(255,255,255,0.08)',
+        background: hovered ? `rgba(${ACCENT_RGB},0.1)` : 'rgba(255,255,255,0.03)',
+        color: hovered ? ACCENT : 'rgba(255,255,255,0.4)',
         fontSize: 16, transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-2px)' : 'none',
         textDecoration: 'none',
@@ -48,7 +53,7 @@ const Footer = () => {
       <div style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: 120, height: 1,
-        background: 'linear-gradient(90deg, transparent, #E8613C, #F0A878, transparent)',
+        background: `linear-gradient(90deg, transparent, ${ACCENT}, ${ACCENT_LIGHT}, transparent)`,
       }} />
 
       <div style={{

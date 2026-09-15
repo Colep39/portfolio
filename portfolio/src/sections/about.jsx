@@ -3,6 +3,12 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaFileAlt } from "react-icons/fa";
 /* eslint-disable */
 import { motion } from "framer-motion";
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = "#22C55E";       // green-500
+const ACCENT_HOVER = "#16A34A"; // green-600
+const ACCENT_LIGHT = "#86EFAC"; // green-300
+const ACCENT_RGB = "34, 197, 94";
+
 const links = [
   { label: "GitHub",   icon: <FaGithub size={15} />,   href: "https://github.com/colep39",                 primary: true  },
   { label: "LinkedIn", icon: <FaLinkedin size={15} />,  href: "https://www.linkedin.com/in/cole-plagens/", primary: false },
@@ -42,9 +48,9 @@ function LinkButton({ label, icon, href, primary }) {
 
   const primaryStyle = {
     ...base,
-    background: hovered ? "#d45530" : "#E8613C",
+    background: hovered ? ACCENT_HOVER : ACCENT,
     color: "#fff", border: "1px solid transparent",
-    boxShadow: hovered ? "0 0 24px rgba(232,97,60,0.35)" : "none",
+    boxShadow: hovered ? `0 0 24px rgba(${ACCENT_RGB},0.35)` : "none",
     transform: hovered ? "translateY(-1px)" : "none",
   };
 
@@ -102,7 +108,7 @@ const AboutMe = () => {
           <div style={{ position: "relative" }}>
             <div style={{
               position: "absolute", inset: -3, borderRadius: "50%",
-              background: "#E8613C", zIndex: 0,
+              background: ACCENT, zIndex: 0,
             }} />
             <div style={{
               position: "absolute", inset: 0, borderRadius: "50%",
@@ -124,15 +130,15 @@ const AboutMe = () => {
               display: "flex", alignItems: "center", gap: 6,
               padding: "5px 10px", borderRadius: 20,
               background: "rgba(13,13,13,0.85)",
-              border: "1px solid rgba(232,97,60,0.35)",
+              border: `1px solid rgba(${ACCENT_RGB},0.35)`,
               backdropFilter: "blur(8px)",
             }}>
               <span style={{
                 width: 7, height: 7, borderRadius: "50%",
-                background: "#E8613C", boxShadow: "0 0 6px #E8613C",
+                background: ACCENT, boxShadow: `0 0 6px ${ACCENT}`,
                 display: "inline-block", animation: "pulse 2s ease-in-out infinite",
               }} />
-              <span style={{ fontSize: 11, color: "#E8613C", fontWeight: 600, letterSpacing: "0.05em" }}>
+              <span style={{ fontSize: 11, color: ACCENT, fontWeight: 600, letterSpacing: "0.05em" }}>
                 Employed
               </span>
             </div>
@@ -164,7 +170,7 @@ const AboutMe = () => {
               transition={{ duration: 0.6, delay: 0.35 }}
               style={{
                 marginTop: 12, width: 48, height: 3,
-                background: "#E8613C", borderRadius: 3, transformOrigin: "left",
+                background: ACCENT, borderRadius: 3, transformOrigin: "left",
               }}
             />
           </div>
@@ -180,7 +186,7 @@ const AboutMe = () => {
             Outside of tech I enjoy sports and TV/movies.
           </p>
 
-          <div style={{ height: 1, background: "rgba(232,97,60,0.2)" }} />
+          <div style={{ height: 1, background: `rgba(${ACCENT_RGB},0.2)` }} />
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {links.map(l => <LinkButton key={l.label} {...l} />)}

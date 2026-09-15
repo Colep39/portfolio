@@ -7,6 +7,9 @@ import {
 } from 'react-icons/si';
 import { FaCode, FaAws } from 'react-icons/fa';
 
+// Fallback accent if a project doesn't specify its own (see Projects.jsx)
+const ACCENT = '#22C55E'; // green-500
+
 const techIcons = {
   React: SiReact,
   'Node.js': SiNodedotjs,
@@ -19,6 +22,8 @@ const techIcons = {
   AWS: FaAws,
 };
 
+// Tech brand colors are left as-is — these represent each technology's own
+// identity color, not the site theme.
 const TECH_COLORS = {
   React: '#38bdf8',
   'Node.js': '#4ade80',
@@ -78,7 +83,7 @@ const ProjectModal = ({ project, onClose }) => {
 
   if (!project) return null;
 
-  const accent = project.accent || '#E8613C';
+  const accent = project.accent || ACCENT;
 
   return (
     <div

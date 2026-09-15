@@ -8,6 +8,13 @@ import {
 } from 'react-icons/si';
 import ProjectModal from '../components/projectModal';
 
+// Theme accent used for headers/underlines. Per-project accents (below) give
+// each card its own shade of green for visual variety while staying on-theme.
+const ACCENT = '#22C55E';       // green-500
+const ACCENT_RGB = '34, 197, 94';
+
+// Tech brand colors are left as-is — these represent each technology's own
+// identity color, not the site theme.
 const TECH_CONFIG = {
   React:      { icon: FaReact,      color: '#38bdf8' },
   'C#':       { icon: SiDotnet,     color: '#a78bfa' },
@@ -36,7 +43,7 @@ const projects = [
     ],
     live: null,
     index: '01',
-    accent: '#E8613C',
+    accent: '#22C55E',
   },
   {
     id: 2,
@@ -48,7 +55,7 @@ const projects = [
     images: ['/volunteer4.png', '/volunteer1.png', '/volunteer2.png', '/volunteer3.png'],
     live: 'https://cougar-connect.vercel.app/',
     index: '02',
-    accent: '#F0A878',
+    accent: '#4ADE80',
   },
   {
     id: 3,
@@ -60,7 +67,7 @@ const projects = [
     images: ['/incidentmonitor.png'],
     live: null,
     index: '03',
-    accent: '#C4A882',
+    accent: '#0D9488',
   },
 ];
 
@@ -303,7 +310,7 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           style={{
             margin: '18px auto 0', width: 48, height: 3,
-            background: '#E8613C', borderRadius: 3, transformOrigin: 'left',
+            background: ACCENT, borderRadius: 3, transformOrigin: 'left',
           }}
         />
       </div>

@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 /* eslint-disable */
 import { motion, AnimatePresence } from "framer-motion";
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = "#22C55E";       // green-500
+const ACCENT_HOVER = "#16A34A"; // green-600
+const ACCENT_LIGHT = "#86EFAC"; // green-300
+const ACCENT_RGB = "34, 197, 94";
+
 const roles = [
   "Full Stack Developer",
   "Data Scientist",
@@ -10,7 +16,7 @@ const roles = [
   "Collaborator",
   "System Minded",
   "Cloud Practitioner",
-  
+
 ];
 
 const dots = [
@@ -37,7 +43,7 @@ function Cursor() {
       marginLeft: 6,
       borderRadius: 2,
       verticalAlign: "middle",
-      background: on ? "#E8613C" : "transparent",
+      background: on ? ACCENT : "transparent",
       transition: "background 0.1s",
     }} />
   );
@@ -63,10 +69,10 @@ function CTAButton({ href, primary, children }) {
         cursor: "pointer",
         transform: hovered ? "translateY(-2px)" : "none",
         ...(primary ? {
-          background: hovered ? "#d45530" : "#E8613C",
+          background: hovered ? ACCENT_HOVER : ACCENT,
           color: "#fff",
           border: "1px solid transparent",
-          boxShadow: hovered ? "0 8px 24px rgba(232,97,60,0.3)" : "none",
+          boxShadow: hovered ? `0 8px 24px rgba(${ACCENT_RGB},0.3)` : "none",
         } : {
           background: hovered ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.03)",
           color: hovered ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.5)",
@@ -165,7 +171,7 @@ const Hero = () => {
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
           }}>Cole </span><span style={{
-            background: "linear-gradient(135deg, #E8613C 0%, #F0A878 100%)",
+            background: `linear-gradient(135deg, ${ACCENT} 0%, ${ACCENT_LIGHT} 100%)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -186,7 +192,7 @@ const Hero = () => {
             >
               <div style={{
                 width: 24, height: 2, flexShrink: 0, borderRadius: 2,
-                background: "#E8613C",
+                background: ACCENT,
               }} />
               <span style={{
                 fontSize: "clamp(18px, 2.5vw, 28px)",

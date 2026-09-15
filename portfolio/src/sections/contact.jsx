@@ -3,14 +3,20 @@ import emailjs from '@emailjs/browser';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 /* eslint-disable */
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = '#22C55E';       // green-500
+const ACCENT_HOVER = '#16A34A'; // green-600
+const ACCENT_LIGHT = '#86EFAC'; // green-300
+const ACCENT_RGB = '34, 197, 94';
+
 function InputField({ type = 'text', name, placeholder, required, multiline, rows }) {
   const [focused, setFocused] = useState(false);
   const shared = {
     width: '100%',
     padding: '12px 16px',
     borderRadius: 10,
-    border: focused ? '1px solid rgba(232,97,60,0.5)' : '1px solid rgba(255,255,255,0.08)',
-    background: focused ? 'rgba(232,97,60,0.06)' : 'rgba(255,255,255,0.03)',
+    border: focused ? `1px solid rgba(${ACCENT_RGB},0.5)` : '1px solid rgba(255,255,255,0.08)',
+    background: focused ? `rgba(${ACCENT_RGB},0.06)` : 'rgba(255,255,255,0.03)',
     color: '#fff',
     fontSize: 14,
     outline: 'none',
@@ -18,7 +24,7 @@ function InputField({ type = 'text', name, placeholder, required, multiline, row
     boxSizing: 'border-box',
     fontFamily: 'inherit',
     resize: multiline ? 'vertical' : undefined,
-    boxShadow: focused ? '0 0 0 3px rgba(232,97,60,0.1)' : 'none',
+    boxShadow: focused ? `0 0 0 3px rgba(${ACCENT_RGB},0.1)` : 'none',
   };
 
   return multiline ? (
@@ -107,7 +113,7 @@ const ContactModal = ({ toggleModal }) => {
         {/* Top accent line */}
         <div style={{
           position: 'absolute', top: 0, left: 0, right: 0, height: 2,
-          borderRadius: '20px 20px 0 0', background: '#E8613C',
+          borderRadius: '20px 20px 0 0', background: ACCENT,
         }} />
 
         {/* Close button */}
@@ -143,7 +149,7 @@ const ContactModal = ({ toggleModal }) => {
           }}>
             Contact Me
           </h1>
-          <div style={{ marginTop: 10, width: 36, height: 2, background: '#E8613C', borderRadius: 2 }} />
+          <div style={{ marginTop: 10, width: 36, height: 2, background: ACCENT, borderRadius: 2 }} />
         </div>
 
         {/* Success state */}
@@ -154,10 +160,10 @@ const ContactModal = ({ toggleModal }) => {
           }}>
             <div style={{
               width: 52, height: 52, borderRadius: '50%',
-              background: 'rgba(232,97,60,0.12)', border: '1px solid rgba(232,97,60,0.3)',
+              background: `rgba(${ACCENT_RGB},0.12)`, border: `1px solid rgba(${ACCENT_RGB},0.3)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22,
             }}>✓</div>
-            <p style={{ margin: 0, color: '#E8613C', fontWeight: 600, fontSize: 16 }}>Message sent!</p>
+            <p style={{ margin: 0, color: ACCENT, fontWeight: 600, fontSize: 16 }}>Message sent!</p>
             <p style={{ margin: 0, color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>I'll get back to you soon.</p>
           </div>
         ) : (
@@ -172,12 +178,12 @@ const ContactModal = ({ toggleModal }) => {
               style={{
                 marginTop: 4, width: '100%', padding: '13px 0', borderRadius: 10,
                 border: '1px solid transparent',
-                background: sending ? 'rgba(232,97,60,0.4)' : '#E8613C',
+                background: sending ? `rgba(${ACCENT_RGB},0.4)` : ACCENT,
                 color: '#fff', fontSize: 14, fontWeight: 600, letterSpacing: '0.02em',
                 cursor: sending ? 'not-allowed' : 'pointer',
                 transition: 'all 0.2s ease', fontFamily: 'inherit',
               }}
-              onMouseEnter={e => { if (!sending) e.currentTarget.style.boxShadow = '0 0 24px rgba(232,97,60,0.4)'; }}
+              onMouseEnter={e => { if (!sending) e.currentTarget.style.boxShadow = `0 0 24px rgba(${ACCENT_RGB},0.4)`; }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; }}
             >
               {sending ? 'Sending…' : 'Send Message'}
@@ -186,16 +192,16 @@ const ContactModal = ({ toggleModal }) => {
         )}
 
         {/* Divider */}
-        <div style={{ margin: '28px 0 20px', height: 1, background: 'rgba(232,97,60,0.2)' }} />
+        <div style={{ margin: '28px 0 20px', height: 1, background: `rgba(${ACCENT_RGB},0.2)` }} />
 
         {/* Direct email */}
         <p style={{ margin: '0 0 18px', fontSize: 13, color: 'rgba(255,255,255,0.35)', textAlign: 'center' }}>
           Or email me at{' '}
           <a
             href="mailto:cbplagen@outlook.com"
-            style={{ color: '#E8613C', textDecoration: 'none', fontWeight: 500 }}
-            onMouseEnter={e => e.currentTarget.style.color = '#F0A878'}
-            onMouseLeave={e => e.currentTarget.style.color = '#E8613C'}
+            style={{ color: ACCENT, textDecoration: 'none', fontWeight: 500 }}
+            onMouseEnter={e => e.currentTarget.style.color = ACCENT_LIGHT}
+            onMouseLeave={e => e.currentTarget.style.color = ACCENT}
           >
             cbplagen@outlook.com
           </a>
@@ -222,9 +228,9 @@ const ContactModal = ({ toggleModal }) => {
                 fontSize: 16, textDecoration: 'none', transition: 'all 0.2s ease',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.color = '#E8613C';
-                e.currentTarget.style.borderColor = 'rgba(232,97,60,0.5)';
-                e.currentTarget.style.background = 'rgba(232,97,60,0.1)';
+                e.currentTarget.style.color = ACCENT;
+                e.currentTarget.style.borderColor = `rgba(${ACCENT_RGB},0.5)`;
+                e.currentTarget.style.background = `rgba(${ACCENT_RGB},0.1)`;
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={e => {

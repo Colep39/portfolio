@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 /* eslint-disable */
 
+// Theme accent — swap these three values to re-theme the whole component
+const ACCENT = '#22C55E';       // green-500
+const ACCENT_HOVER = '#16A34A'; // green-600
+const ACCENT_RGB = '34, 197, 94';
+
 const navLinks = [
   { label: 'About',    href: '#about' },
   { label: 'Skills',   href: '#skills' },
@@ -34,7 +39,7 @@ function NavLink({ href, label, onClick }) {
         left: 0,
         width: hovered ? '100%' : '0%',
         height: 1,
-        background: '#E8613C',
+        background: ACCENT,
         borderRadius: 1,
         transition: 'width 0.25s ease',
         display: 'block',
@@ -119,8 +124,8 @@ const NavBar = ({ toggleModal }) => {
                 letterSpacing: '0.01em',
                 padding: '8px 18px',
                 borderRadius: 8,
-                border: contactHovered ? '1px solid rgba(232,97,60,0.5)' : '1px solid rgba(255,255,255,0.1)',
-                background: contactHovered ? 'rgba(232,97,60,0.1)' : 'rgba(255,255,255,0.04)',
+                border: contactHovered ? `1px solid rgba(${ACCENT_RGB},0.5)` : '1px solid rgba(255,255,255,0.1)',
+                background: contactHovered ? `rgba(${ACCENT_RGB},0.1)` : 'rgba(255,255,255,0.04)',
                 color: contactHovered ? '#fff' : 'rgba(255,255,255,0.55)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
@@ -143,10 +148,10 @@ const NavBar = ({ toggleModal }) => {
                 padding: '8px 18px',
                 borderRadius: 8,
                 textDecoration: 'none',
-                background: resumeHovered ? '#d45530' : '#E8613C',
+                background: resumeHovered ? ACCENT_HOVER : ACCENT,
                 color: '#fff',
                 border: '1px solid transparent',
-                boxShadow: resumeHovered ? '0 0 20px rgba(232,97,60,0.35)' : 'none',
+                boxShadow: resumeHovered ? `0 0 20px rgba(${ACCENT_RGB},0.35)` : 'none',
                 transition: 'all 0.2s ease',
                 transform: resumeHovered ? 'translateY(-1px)' : 'none',
               }}
@@ -241,7 +246,7 @@ const NavBar = ({ toggleModal }) => {
               fontSize: 14,
               fontWeight: 600,
               textDecoration: 'none',
-              background: '#E8613C',
+              background: ACCENT,
               color: '#fff',
             }}
           >
