@@ -12,9 +12,12 @@ import { VscAzure } from 'react-icons/vsc';
 import { DiDocker } from 'react-icons/di';
 import { BiLogoVisualStudio } from 'react-icons/bi';
 
-// Theme accent — swap these three values to re-theme the whole component
+// Theme accent — swap these values to re-theme the whole component
 const ACCENT = '#22C55E';       // green-500
 const ACCENT_RGB = '34, 197, 94';
+const BG = '#0D0D0D';
+
+const MONO = "'JetBrains Mono', 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace";
 
 const categories = [
   {
@@ -59,6 +62,9 @@ const categories = [
   },
 ];
 
+const slugify = (s) =>
+  s.toLowerCase().replace(/&/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+
 function SkillChip({ name, icon: Icon, delay }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -73,12 +79,12 @@ function SkillChip({ name, icon: Icon, delay }) {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
-        padding: '9px 16px',
+        padding: '8px 14px',
         borderRadius: 6,
         border: hovered
-          ? `1px solid rgba(${ACCENT_RGB},0.45)`
+          ? `1px solid rgba(${ACCENT_RGB},0.5)`
           : '1px solid rgba(255,255,255,0.08)',
-        background: hovered ? `rgba(${ACCENT_RGB},0.08)` : 'transparent',
+        background: hovered ? `rgba(${ACCENT_RGB},0.08)` : 'rgba(255,255,255,0.015)',
         cursor: 'default',
         transition: 'all 0.18s ease',
         userSelect: 'none',
@@ -86,15 +92,15 @@ function SkillChip({ name, icon: Icon, delay }) {
     >
       <Icon style={{
         fontSize: 15,
-        color: hovered ? ACCENT : 'rgba(255,255,255,0.35)',
+        color: hovered ? ACCENT : 'rgba(255,255,255,0.38)',
         transition: 'color 0.18s ease',
         flexShrink: 0,
       }} />
       <span style={{
-        fontSize: 13,
+        fontFamily: MONO,
+        fontSize: 12.5,
         fontWeight: 500,
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.55)',
-        letterSpacing: '0.01em',
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.6)',
         transition: 'color 0.18s ease',
         whiteSpace: 'nowrap',
       }}>
@@ -111,29 +117,30 @@ function CategoryBlock({ category, blockIndex }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, delay: blockIndex * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        borderRadius: 14,
+        border: '1px solid rgba(255,255,255,0.09)',
+        background: 'rgba(255,255,255,0.022)',
+        overflow: 'hidden',
+      }}
     >
-      {/* Title */}
+      {/* Title bar */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 14,
-        marginBottom: 20,
+        gap: 10,
+        padding: '11px 20px',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        fontFamily: MONO,
+        fontSize: 12,
+        color: 'rgba(255,255,255,0.45)',
       }}>
-        <span style={{
-          fontSize: 11,
-          fontWeight: 700,
-          fontFamily: "'Courier New', monospace",
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: ACCENT,
-        }}>
-          {category.title}
-        </span>
-        <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.07)' }} />
+        <span style={{ color: 'rgba(255,255,255,0.25)' }}>~/skills/</span>
+        <span style={{ color: ACCENT, fontWeight: 600 }}>{slugify(category.title)}</span>
       </div>
 
       {/* Chips */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '22px 20px 24px' }}>
         {category.items.map((item, i) => (
           <SkillChip
             key={item.name}
@@ -160,7 +167,7 @@ const Skills = () => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '100px 24px',
-        background: '#0D0D0D',
+        background: BG,
         overflow: 'hidden',
         boxSizing: 'border-box',
       }}
@@ -168,23 +175,21 @@ const Skills = () => {
       <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: 1100 }}>
 
         {/* Header */}
-        <div style={{ marginBottom: 72 }}>
+        <div style={{ marginBottom: 56 }}>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 18 }}
+            style={{
+              fontFamily: MONO,
+              fontSize: 12.5, letterSpacing: '0.12em',
+              color: 'rgba(255,255,255,0.42)', textTransform: 'uppercase',
+              marginBottom: 16,
+            }}
           >
-            <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
-            <span style={{
-              fontFamily: "'Courier New', monospace",
-              fontSize: 11, letterSpacing: '0.2em',
-              color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase',
-            }}>
-              Technical Expertise
-            </span>
-            <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
+            <span style={{ color: ACCENT, marginRight: 6 }}>//</span>
+            Technical Expertise
           </motion.div>
 
           <motion.h1
@@ -196,27 +201,15 @@ const Skills = () => {
               margin: 0,
               fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800,
               letterSpacing: '-0.04em', lineHeight: 1,
-              background: 'linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.45) 100%)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+              color: '#fff',
             }}
           >
             My Skills
           </motion.h1>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{
-              marginTop: 18, width: 48, height: 3,
-              background: ACCENT, borderRadius: 3, transformOrigin: 'left',
-            }}
-          />
         </div>
 
-        {/* Category blocks stacked vertically with generous spacing */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 52 }}>
+        {/* Category blocks stacked vertically */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {categories.map((cat, i) => (
             <CategoryBlock key={cat.title} category={cat} blockIndex={i} />
           ))}

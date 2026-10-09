@@ -8,10 +8,12 @@ import {
 } from 'react-icons/si';
 import ProjectModal from '../components/projectModal';
 
-// Theme accent used for headers/underlines. Per-project accents (below) give
-// each card its own shade of green for visual variety while staying on-theme.
+// Theme accent — swap these values to re-theme the whole component
 const ACCENT = '#22C55E';       // green-500
 const ACCENT_RGB = '34, 197, 94';
+const BG = '#0D0D0D';
+
+const MONO = "'JetBrains Mono', 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace";
 
 // Tech brand colors are left as-is — these represent each technology's own
 // identity color, not the site theme.
@@ -31,6 +33,7 @@ const TECH_CONFIG = {
 const projects = [
   {
     id: 1,
+    slug: 'themepark-management',
     title: 'Themepark Management System',
     description:
       'A fullstack management system for a themepark, built with React, C#, and MySQL. It supports role-based access, reporting dashboards, and database-enforced constraints for operational safety.',
@@ -42,11 +45,10 @@ const projects = [
       '/themepark6.png', '/themepark7.png', '/themepark9.png',
     ],
     live: null,
-    index: '01',
-    accent: '#22C55E',
   },
   {
     id: 2,
+    slug: 'volunteer-matching',
     title: 'Volunteer Matching Platform',
     description:
       'A fullstack platform for managing volunteer events with admin-controlled listings, recommendations, authentication, notifications, and email verification.',
@@ -54,11 +56,10 @@ const projects = [
     techStack: ['React', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
     images: ['/volunteer4.png', '/volunteer1.png', '/volunteer2.png', '/volunteer3.png'],
     live: 'https://cougar-connect.vercel.app/',
-    index: '02',
-    accent: '#4ADE80',
   },
   {
     id: 3,
+    slug: 'incident-monitoring',
     title: 'Incident Monitoring Platform',
     description:
       'A full-stack incident monitoring and root cause analysis platform built to demonstrate production-grade engineering practices. It ingests logs from distributed services, detects anomalies using statistical analysis, groups related errors into incidents, and surfaces everything through a real-time dashboard.',
@@ -66,8 +67,6 @@ const projects = [
     techStack: ['React', 'TypeScript', 'C#', 'PostgreSQL', 'Docker'],
     images: ['/incidentmonitor.png'],
     live: null,
-    index: '03',
-    accent: '#0D9488',
   },
 ];
 
@@ -83,7 +82,7 @@ function TechPill({ tech }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         display: 'flex', alignItems: 'center', gap: 7,
-        padding: '7px 13px', borderRadius: 8,
+        padding: '6px 12px', borderRadius: 6,
         border: hovered ? `1px solid ${c}55` : '1px solid rgba(255,255,255,0.08)',
         background: hovered ? `${c}12` : 'rgba(255,255,255,0.03)',
         transition: 'all 0.2s ease', cursor: 'default',
@@ -91,8 +90,8 @@ function TechPill({ tech }) {
     >
       <Icon style={{ color: c, fontSize: 14, flexShrink: 0 }} />
       <span style={{
-        fontSize: 12, fontWeight: 500,
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.55)',
+        fontFamily: MONO, fontSize: 11.5, fontWeight: 500,
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.58)',
         transition: 'color 0.2s', whiteSpace: 'nowrap',
       }}>
         {tech}
@@ -101,7 +100,7 @@ function TechPill({ tech }) {
   );
 }
 
-function LinkBtn({ href, icon: Icon, label, accent }) {
+function LinkBtn({ href, icon: Icon, label, primary }) {
   const [hovered, setHovered] = useState(false);
   return (
     <a
@@ -112,12 +111,13 @@ function LinkBtn({ href, icon: Icon, label, accent }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 8,
-        padding: '9px 18px', borderRadius: 9, fontSize: 13, fontWeight: 600,
+        padding: '9px 16px', borderRadius: 8, fontSize: 12.5, fontWeight: 600,
+        fontFamily: MONO,
         textDecoration: 'none', transition: 'all 0.2s ease',
         transform: hovered ? 'translateY(-1px)' : 'none',
-        background: hovered ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.03)',
-        color: hovered ? '#fff' : 'rgba(255,255,255,0.55)',
-        border: hovered ? `1px solid ${accent}55` : '1px solid rgba(255,255,255,0.08)',
+        background: hovered ? `rgba(${ACCENT_RGB},0.1)` : 'rgba(255,255,255,0.03)',
+        color: hovered ? '#fff' : 'rgba(255,255,255,0.62)',
+        border: hovered ? `1px solid rgba(${ACCENT_RGB},0.55)` : '1px solid rgba(255,255,255,0.1)',
       }}
     >
       <Icon style={{ fontSize: 15 }} />
@@ -127,126 +127,123 @@ function LinkBtn({ href, icon: Icon, label, accent }) {
 }
 
 function ProjectCard({ project, onOpen, cardIndex }) {
-  const { title, description, techStack, github, live, images, index, accent } = project;
+  const { title, slug, description, techStack, github, live, images } = project;
   const isEven = cardIndex % 2 === 0;
 
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7, delay: cardIndex * 0.1, ease: [0.16, 1, 0.3, 1] }}
       style={{
-        position: 'relative', display: 'flex', flexDirection: 'row', flexWrap: 'wrap',
-        gap: 0, width: '100%', maxWidth: 1100, borderRadius: 20,
-        border: '1px solid rgba(255,255,255,0.07)',
-        background: 'rgba(255,255,255,0.025)',
+        position: 'relative', width: '100%', maxWidth: 1100,
+        borderRadius: 16,
+        border: '1px solid rgba(255,255,255,0.09)',
+        background: 'rgba(255,255,255,0.022)',
         overflow: 'hidden', marginBottom: 28,
       }}
     >
-      {/* Top accent line */}
+      {/* Title bar */}
       <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 2,
-        background: `linear-gradient(90deg, ${accent}, transparent)`,
-      }} />
-
-      {/* Text side */}
-      <div style={{
-        flex: '1 1 340px', padding: '40px 40px 36px',
-        display: 'flex', flexDirection: 'column', gap: 20,
-        order: isEven ? 0 : 1,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+        padding: '11px 20px',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        fontFamily: MONO, fontSize: 12, color: 'rgba(255,255,255,0.4)',
       }}>
-        <div>
-          <div style={{
-            fontFamily: "'Courier New', monospace", fontSize: 11,
-            letterSpacing: '0.15em', color: accent, marginBottom: 8, opacity: 0.9,
-          }}>
-            {index} ──
-          </div>
+        <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <span style={{ color: 'rgba(255,255,255,0.25)' }}>~/projects/</span>
+          <span style={{ color: ACCENT, fontWeight: 600 }}>{slug}</span>
+        </span>
+        <span style={{ flexShrink: 0, color: 'rgba(255,255,255,0.3)' }}>README.md</span>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        {/* Text side */}
+        <div style={{
+          flex: '1 1 340px', padding: '34px 36px 34px',
+          display: 'flex', flexDirection: 'column', gap: 20,
+          order: isEven ? 0 : 1, minWidth: 0,
+        }}>
           <h2 style={{
-            margin: 0, fontSize: 'clamp(20px, 2.5vw, 26px)', fontWeight: 700,
-            letterSpacing: '-0.02em', color: '#fff', lineHeight: 1.2,
+            margin: 0, fontSize: 'clamp(21px, 2.5vw, 27px)', fontWeight: 700,
+            letterSpacing: '-0.025em', color: '#fff', lineHeight: 1.2,
           }}>
             {title}
           </h2>
-        </div>
 
-        <div style={{ height: 1, background: `linear-gradient(90deg, ${accent}40, transparent)` }} />
+          <div style={{ height: 1, background: 'rgba(255,255,255,0.08)' }} />
 
-        <p style={{ margin: 0, fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', fontWeight: 400 }}>
-          {description}
-        </p>
+          <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.52)', fontWeight: 400 }}>
+            {description}
+          </p>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-          {techStack.map(t => <TechPill key={t} tech={t} />)}
-        </div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 4 }}>
-          <LinkBtn href={github} icon={FaGithub} label="GitHub" accent={accent} />
-          {live && <LinkBtn href={live} icon={FaRegEye} label="Live Site" accent={accent} />}
-        </div>
-      </div>
-
-      {/* Image side */}
-      <div style={{ flex: '1 1 340px', minHeight: 280, order: isEven ? 1 : 0, position: 'relative' }}>
-        <motion.button
-          type="button"
-          aria-label={`Open ${title} gallery`}
-          onClick={() => onOpen(project)}
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
-          style={{
-            width: '100%', height: '100%', minHeight: 280,
-            border: 'none', padding: 0, cursor: 'pointer',
-            background: 'none', position: 'relative', display: 'block',
-          }}
-        >
-          <div style={{
-            position: 'absolute', inset: 0,
-            backgroundImage: `url(${images[0]})`,
-            backgroundSize: 'cover', backgroundPosition: 'center',
-            transition: 'transform 0.4s ease',
-          }} />
-
-          <div className="img-overlay" style={{
-            position: 'absolute', inset: 0,
-            background: 'rgba(0,0,0,0)', transition: 'background 0.3s ease',
-          }} />
-
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: isEven
-              ? 'linear-gradient(to right, rgba(13,13,13,0.5) 0%, transparent 40%)'
-              : 'linear-gradient(to left, rgba(13,13,13,0.5) 0%, transparent 40%)',
-            pointerEvents: 'none',
-          }} />
-
-          <div style={{
-            position: 'absolute', bottom: 16, right: 16,
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '7px 14px', borderRadius: 20,
-            background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.12)',
-            backdropFilter: 'blur(8px)', color: '#fff', fontSize: 12,
-            fontWeight: 600, letterSpacing: '0.04em',
-          }}>
-            <FaRegEye style={{ fontSize: 13 }} />
-            Gallery
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            {techStack.map(t => <TechPill key={t} tech={t} />)}
           </div>
 
-          {images.length > 1 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 4 }}>
+            <LinkBtn href={github} icon={FaGithub} label="GitHub" />
+            {live && <LinkBtn href={live} icon={FaRegEye} label="Live Site" />}
+          </div>
+        </div>
+
+        {/* Image side */}
+        <div style={{
+          flex: '1 1 340px', minHeight: 280, order: isEven ? 1 : 0, position: 'relative',
+          borderLeft: isEven ? '1px solid rgba(255,255,255,0.07)' : 'none',
+          borderRight: isEven ? 'none' : '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <motion.button
+            type="button"
+            aria-label={`Open ${title} gallery`}
+            onClick={() => onOpen(project)}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            style={{
+              width: '100%', height: '100%', minHeight: 280,
+              border: 'none', padding: 0, cursor: 'pointer',
+              background: 'none', position: 'relative', display: 'block',
+            }}
+          >
             <div style={{
-              position: 'absolute', top: 16, right: 16,
-              padding: '4px 10px', borderRadius: 20,
-              background: `${accent}22`, border: `1px solid ${accent}44`,
-              color: accent, fontSize: 11,
-              fontFamily: "'Courier New', monospace", letterSpacing: '0.08em',
+              position: 'absolute', inset: 0,
+              backgroundImage: `url(${images[0]})`,
+              backgroundSize: 'cover', backgroundPosition: 'center',
+            }} />
+
+            <div className="img-overlay" style={{
+              position: 'absolute', inset: 0,
+              background: 'rgba(0,0,0,0)', transition: 'background 0.3s ease',
+            }} />
+
+            <div style={{
+              position: 'absolute', bottom: 16, right: 16,
+              display: 'flex', alignItems: 'center', gap: 6,
+              padding: '7px 14px', borderRadius: 8,
+              background: 'rgba(0,0,0,0.65)', border: '1px solid rgba(255,255,255,0.14)',
+              backdropFilter: 'blur(8px)', color: '#fff', fontSize: 12,
+              fontFamily: MONO, fontWeight: 600,
             }}>
-              {images.length} photos
+              <FaRegEye style={{ fontSize: 13 }} />
+              Gallery
             </div>
-          )}
-        </motion.button>
+
+            {images.length > 1 && (
+              <div style={{
+                position: 'absolute', top: 16, right: 16,
+                padding: '4px 10px', borderRadius: 6,
+                background: 'rgba(0,0,0,0.65)', border: `1px solid rgba(${ACCENT_RGB},0.4)`,
+                color: ACCENT, fontSize: 11,
+                fontFamily: MONO, letterSpacing: '0.04em',
+              }}>
+                {images.length} photos
+              </div>
+            )}
+          </motion.button>
+        </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
@@ -264,28 +261,25 @@ const Projects = () => {
       id="projects"
       style={{
         position: 'relative', width: '100%', minHeight: '100vh',
-        background: '#0D0D0D', overflow: 'hidden',
+        background: BG, overflow: 'hidden',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         padding: '100px 24px', boxSizing: 'border-box',
       }}
     >
       {/* Header */}
-      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', marginBottom: 72 }}>
+      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', marginBottom: 64 }}>
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 18 }}
+          style={{
+            fontFamily: MONO, fontSize: 12.5, letterSpacing: '0.12em',
+            color: 'rgba(255,255,255,0.42)', textTransform: 'uppercase', marginBottom: 16,
+          }}
         >
-          <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
-          <span style={{
-            fontFamily: "'Courier New', monospace", fontSize: 11,
-            letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase',
-          }}>
-            Selected Work
-          </span>
-          <div style={{ width: 32, height: 1, background: 'rgba(255,255,255,0.2)' }} />
+          <span style={{ color: ACCENT, marginRight: 6 }}>//</span>
+          Selected Work
         </motion.div>
 
         <motion.h1
@@ -295,24 +289,11 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{
             margin: 0, fontSize: 'clamp(40px, 6vw, 72px)', fontWeight: 800,
-            letterSpacing: '-0.04em', lineHeight: 1,
-            background: 'linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.45) 100%)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            letterSpacing: '-0.04em', lineHeight: 1, color: '#fff',
           }}
         >
           My Projects
         </motion.h1>
-
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          style={{
-            margin: '18px auto 0', width: 48, height: 3,
-            background: ACCENT, borderRadius: 3, transformOrigin: 'left',
-          }}
-        />
       </div>
 
       {/* Cards */}
